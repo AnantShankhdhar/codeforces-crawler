@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cf</title>
-</head>
-<body>
-    This is index page.
-</body>
-</html>
+<h1>Codeforces user handle-</h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'userinfo:detail' %}" method="post">
+    {% csrf_token %}
+    <label for="handle">
+            User handle:
+    </label><br>
+    <input type="text" id="handle" name="user" /><br>
+    <input type="submit" value="Submit">
+</form>
