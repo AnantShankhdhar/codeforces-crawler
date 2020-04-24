@@ -39,8 +39,9 @@ def scrape(username):
             #print("Not mentioned") 
         try:
             rating=info.find('ul').find('li').find('span').string #rating
-            print(rating)
+            #print(rating)
         except:
+            rating = "Not given any contest"
             print("Not given any contest")
 
         try:    
@@ -289,7 +290,7 @@ def scrape(username):
         print(prob_rat)
         print(type_list)
         print(lang_list)
-        return rank,color,ar,institute
+        return rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other,rating
     except:
         s = "No such username"
         return s
