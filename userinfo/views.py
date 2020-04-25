@@ -9,24 +9,27 @@ def detail(request):
     user = request.POST['user']  # user is the name of the input
     #rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other = scrape(user)
     verdict = scrape(user)
-    rank = verdict[0]
-    color = verdict[1]
-    ar = verdict[2]
-    institute = verdict[3]
-    #rating = verdict[4]
-    ac=verdict[4]
-    wa=verdict[5]
-    tle=verdict[6]
-    rte=verdict[7]
-    mle=verdict[8]
-    challenged=verdict[9]
-    cpe=verdict[10]
-    skipped=verdict[11]
-    ile=verdict[12]
-    other =verdict[13] 
-    rating =verdict[14]
-    return render(request, 'userinfo/detail.html', {'user': user, 'rank':rank,'color':color,'ar':ar,'institute':institute,'ac':ac,'wa':wa,'tle':tle,'rte':rte,'mle':mle,'challenged':challenged
-    ,'cpe':cpe,'skipped':skipped,'ile':ile,'other':other,'rating':rating})
-    #return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
+    exists = verdict[0]
+    if(exists == False):
+        return render(request, 'userinfo/detail.html', {'exists':exists})
+    else:
+        rank = verdict[1]
+        color = verdict[2]
+        ar = verdict[3]
+        institute = verdict[4]
+        ac=verdict[5]
+        wa=verdict[6]
+        tle=verdict[7]
+        rte=verdict[8]
+        mle=verdict[9]
+        challenged=verdict[10]
+        cpe=verdict[11]
+        skipped=verdict[12]
+        ile=verdict[13]
+        other =verdict[14]
+        rating =verdict[15]
+        return render(request, 'userinfo/detail.html', {'exists':exists,'user': user, 'rank':rank,'color':color,'ar':ar,'institute':institute,'ac':ac,'wa':wa,'tle':tle,'rte':rte,'mle':mle,'challenged':challenged
+        ,'cpe':cpe,'skipped':skipped,'ile':ile,'other':other,'rating':rating})
+        #return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
 
 

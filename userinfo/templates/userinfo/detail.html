@@ -1,29 +1,35 @@
-User name is {{ user }}
-<br>
-{{rating}}
-<br>
-{{color}}
-<br>
-{{ar}}
-<br>
-{{institute}}
-<br>
-{{ac}}
-<br>
-{{wa}}
-<br>
-{{tle}}
-<br>
-{{rte}}
-<br>
-{{mle}}
-<br>
-{{challenged}}
-<br>
-{{cpe}}
-<br>
-{{skipped}}
-<br>
-{{ile}}
-<br>
-{{other}}
+{% if exists == False %}
+    No such username
+{% else %}
+    User name is {{ user }}
+    <br>
+    {{ rank }}
+    <br>
+    {{rating}}
+    <br>
+    {{color}}
+    <br>
+    {{ar}}
+    <br>
+    {{institute}}
+    <br>
+    {{ac}}
+    <br>
+    {{wa}}
+    <br>
+    {{tle}}
+    <br>
+    {{rte}}
+    <br>
+    {{mle}}
+    <br>
+    {{challenged}}
+    <br>
+    {{cpe}}
+    <br>
+    {{skipped}}
+    <br>
+    {{ile}}
+    <br>
+    {{other}}
+{% endif %}
