@@ -9,10 +9,11 @@ def detail(request):
     user = request.POST['user']  # user is the name of the input
     #rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other = scrape(user)
     verdict = scrape(user)
-    exists = verdict[0]
-    if(exists == False):
+    if(verdict == False):
+        exists = verdict
         return render(request, 'userinfo/detail.html', {'exists':exists})
     else:
+        exists = verdict[0]
         rank = verdict[1]
         color = verdict[2]
         ar = verdict[3]
