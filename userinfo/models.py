@@ -1,10 +1,14 @@
 from django.db import models
+import os.path
+
+
 
 
 # Create your models here.
 
 class Question(models.Model):
-    prob_level = models.CharField(max_length=1)
+    prob_link = models.CharField(primary_key=True, max_length=500, default='')
+    prob_level = models.CharField(max_length=1,default="")
     prob_rating = models.IntegerField()
     expression_parsing = models.BooleanField(default=False)
     fft = models.BooleanField(default=False)
