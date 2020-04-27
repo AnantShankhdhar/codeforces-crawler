@@ -1,3 +1,4 @@
+from userinfo.models import Question
 from . import models
 
 def scrape(username):
@@ -155,7 +156,81 @@ def scrape(username):
                         prob_rat.append(object.prob_rat)
                         if(object.special_problem==True):
                             special_problem+=1
-                        #elif()
+                        if(object.expression_parsing==True):
+                            expression_parsing+=1
+                        if(object.fft==True):
+                            fft += 1
+                        if (object.two_pointers == True):
+                            two_pointers += 1
+                        if (object.binary_search == True):
+                            binary_search += 1
+                        if (object.dsu == True):
+                            dsu += 1
+                        if (object.strings == True):
+                            strings += 1
+                        if (object.number_theory == True):
+                            number_theory += 1
+                        if (object.data_structures == True):
+                            data_structures += 1
+                        if (object.hashing == True):
+                            hashing += 1
+                        if (object.shortest_paths == True):
+                            shortest_paths += 1
+                        if (object.matrices == True):
+                            matrices += 1
+                        if (object.string_suffix_structures == True):
+                            string_suffix_structures += 1
+                        if (object.dp == True):
+                            dp += 1
+                        if (object.greedy == True):
+                            greedy += 1
+                        if (object.graph_matchings == True):
+                            graph_matchings += 1
+                        if (object.games == True):
+                            games += 1
+                        if (object.schedules == True):
+                            schedules += 1
+                        if (object.dfs_and_similar == True):
+                            dfs_and_similar += 1
+                        if (object.meet_in_the_middle == True):
+                            meet_in_the_middle += 1
+                        if (object.constructive_algorithms == True):
+                            constructive_algorithms += 1
+                        if (object.bitmasks == True):
+                            bitmasks += 1
+                        if (object.flows == True):
+                            flows += 1
+                        if (object.divide_and_conquer == True):
+                            divide_and_conquer += 1
+                        if (object.geometry == True):
+                            geometry += 1
+                        if (object.math == True):
+                            math += 1
+                        if (object.sortings == True):
+                            sortings += 1
+                        if (object.ternary_search == True):
+                            ternary_search += 1
+                        if (object.combinatorics == True):
+                            combinatorics += 1
+                        if (object.implementation == True):
+                            implementation += 1
+                        if (object.brute_force == True):
+                            brute_force += 1
+                        if (object.sat_2 == True):
+                            sat_2 += 1
+                        if (object.trees == True):
+                            trees += 1
+                        if (object.probabilities == True):
+                            probabilities += 1
+                        if (object.graphs == True):
+                            graphs += 1
+                        if (object.chinese_remainder_theorem == True):
+                            chinese_remainder_theorem += 1
+                        if (object.interactive == True):
+                            interactive += 1
+                        if (object.other_tag == True):
+                            other_tag += 1
+
 
 
                 if (flag == 0):
