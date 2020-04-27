@@ -1,3 +1,5 @@
+from . import models
+
 def scrape(username):
     import requests
     exists = True
@@ -145,95 +147,149 @@ def scrape(username):
 
         try:
             for ele in new_list:
-                try:
-                    int(ele[-1])
-                    type_list.append(ele[-2])
-                except:
-                    type_list.append(ele[-1])
-                r4=requests.get(ele)
-                quessoup=BeautifulSoup(r4.text,"lxml")
-                tag=quessoup.find_all('span',attrs={'class':'tag-box'})
-                for ta in tag:
-                    pt=ta.string.strip()
-                    if(pt[0:1]=='*'):
-                        if(pt[1:]=='special problem'):
+                flag = 0
+                for object in Question.objects.all():
+                    if(object.prob_link == ele):
+                        flag=1
+                        type_list.append(object.prob_level)
+                        prob_rat.append(object.prob_rat)
+                        if(object.special_problem==True):
                             special_problem+=1
+                        #elif()
+
+
+                if (flag == 0):
+                    prob_obj = Question.objects.create(prob_link=ele)
+                    try:
+                        int(ele[-1])
+                        prob_obj.prob_level = ele[-2]
+                        type_list.append(ele[-2])
+                    except:
+                        prob_obj.prob_level = ele[-1]
+                        type_list.append(ele[-1])
+                    r4=requests.get(ele)
+                    quessoup=BeautifulSoup(r4.text,"lxml")
+                    tag=quessoup.find_all('span',attrs={'class':'tag-box'})
+                    for ta in tag:
+                        pt=ta.string.strip()
+                        if(pt[0:1]=='*'):
+                            if(pt[1:]=='special problem'):
+                                prob_obj.special_problem=True
+                                special_problem+=1
+                            else:
+                                prob_obj.prob_rat=pt[1:]
+                                prob_rat.append(pt[1:])
+                        elif(pt=='expression parsing'):
+                            prob_obj.expression_parsing=True
+                            expression_parsing+=1
+                        elif(pt=='fft'):
+                            prob_obj.fft=True
+                            fft+=1
+                        elif(pt=='two pointers'):
+                            prob_obj.two_pointers=True
+                            two_pointers+=1
+                        elif(pt=='binary search'):
+                            prob_obj.binary_search=True
+                            binary_search+=1
+                        elif(pt=='dsu'):
+                            prob_obj.dsu=True
+                            dsu+=1
+                        elif(pt=='strings'):
+                            prob_obj.strings=True
+                            strings+=1
+                        elif(pt=='number theory'):
+                            prob_obj.number_theory=True
+                            number_theory+=1
+                        elif(pt=='data structures'):
+                            prob_obj.data_structures=True
+                            data_structures+=1
+                        elif(pt=='hashing'):
+                            prob_obj.hashing=True
+                            hashing+=1
+                        elif(pt=='shortest paths'):
+                            prob_obj.shortest_paths=True
+                            shortest_paths+=1
+                        elif(pt=='matrices'):
+                            prob_obj.matrices=True
+                            matrices+=1
+                        elif(pt=='string suffix structures'):
+                            prob_obj.string_suffix_structures=True
+                            string_suffix_structures+=1
+                        elif(pt=='interactive'):
+                            prob_obj.interactive=True
+                            interactive+=1
+                        elif(pt=='chinese remainder theorem'):
+                            prob_obj.chinese_remainder_theorem=True
+                            chinese_remainder_theorem+=1
+                        elif (pt == 'graphs'):
+                            prob_obj.graphs=True
+                            graphs+=1
+                        elif (pt == 'probabilities'):
+                            prob_obj.probabilities=True
+                            probabilities+=1
+                        elif (pt == 'trees'):
+                            prob_obj.trees=True
+                            trees+=1
+                        elif (pt == '2-sat'):
+                            prob_obj.sat_2=True
+                            sat_2+=1
+                        elif (pt == 'implementation'):
+                            prob_obj.implementation=True
+                            implementation+=1
+                        elif (pt == 'brute force'):
+                            prob_obj.brute_force =True
+                            brute_force+=1
+                        elif (pt == 'combinatorics'):
+                            prob_obj.combinatorics =True
+                            combinatorics+=1
+                        elif (pt == 'ternary search'):
+                            prob_obj.ternary_search =True
+                            ternary_search+=1
+                        elif (pt == 'sortings'):
+                            prob_obj.sortings =True
+                            sortings+=1
+                        elif (pt == 'math'):
+                            prob_obj.math =True
+                            math+=1
+                        elif(pt == 'graph matchings'):
+                            prob_obj.graph_matchings=True
+                            graph_matchings+=1
+                        elif(pt == 'dp'):
+                            prob_obj.dp=True
+                            dp+=1
+                        elif(pt == 'dfs and similar'):
+                            prob_obj.dfs_and_similar=True
+                            dfs_and_similar+=1
+                        elif(pt == 'meet-in-the-middle'):
+                            prob_obj.meet_in_the_middle=True
+                            meet_in_the_middle+=1
+                        elif(pt == 'games'):
+                            prob_obj.games=True
+                            games+=1
+                        elif(pt == 'schedules'):
+                            prob_obj.schedules=True
+                            schedules+=1
+                        elif(pt == 'constructive algorithms'):
+                            prob_obj.constructive_algorithms=True
+                            constructive_algorithms+=1
+                        elif(pt == 'greedy'):
+                            prob_obj.greedy=True
+                            greedy+=1
+                        elif(pt == 'bitmasks'):
+                            prob_obj.bitmasks=True
+                            bitmasks+=1
+                        elif(pt == 'divide and conquer'):
+                            prob_obj.divide_and_conquer=True
+                            divide_and_conquer+=1
+                        elif(pt == 'flows'):
+                            prob_obj.flows=True
+                            flows+=1
+                        elif(pt == 'geometry'):
+                            prob_obj.geometry=True
+                            geometry+=1
                         else:
-                            prob_rat.append(pt[1:])
-                    elif(pt=='expression parsing'):
-                        expression_parsing+=1
-                    elif(pt=='fft'):
-                        fft+=1
-                    elif(pt=='two pointers'):
-                        two_pointers+=1
-                    elif(pt=='binary search'):
-                        binary_search+=1
-                    elif(pt=='dsu'):
-                        dsu+=1
-                    elif(pt=='strings'):
-                        strings+=1
-                    elif(pt=='number theory'):
-                        number_theory+=1
-                    elif(pt=='data structures'):
-                        data_structures+=1
-                    elif(pt=='hashing'):
-                        hashing+=1
-                    elif(pt=='shortest paths'):
-                        shortest_paths+=1
-                    elif(pt=='matrices'):
-                        matrices+=1
-                    elif(pt=='string suffix structures'):
-                        string_suffix_structures+=1
-                    elif(pt=='interactive'):
-                        interactive=interactive+1
-                    elif(pt=='chinese remainder theorem'):
-                        chinese_remainder_theorem=chinese_remainder_theorem+1
-                    elif (pt == 'graphs'):
-                        graphs = graphs + 1
-                    elif (pt == 'probabilities'):
-                        probabilities = probabilities + 1
-                    elif (pt == 'trees'):
-                        trees = trees + 1
-                    elif (pt == '2-sat'):
-                        sat_2 = sat_2 + 1
-                    elif (pt == 'implementation'):
-                        implementation = implementation + 1
-                    elif (pt == 'brute force'):
-                        brute_force = brute_force + 1
-                    elif (pt == 'combinatorics'):
-                        combinatorics = combinatorics + 1
-                    elif (pt == 'ternary search'):
-                        ternary_search = ternary_search + 1
-                    elif (pt == 'sortings'):
-                        sortings = sortings + 1
-                    elif (pt == 'math'):
-                        math = math+ 1
-                    elif(pt == 'graph matchings'):
-                        graph_matchings+= 1
-                    elif(pt == 'dp'):
-                        dp+= 1
-                    elif(pt == 'dfs and similar'):
-                        dfs_and_similar+=1
-                    elif(pt == 'meet-in-the-middle'):
-                        meet_in_the_middle+=1
-                    elif(pt == 'games'):
-                        games+=1
-                    elif(pt == 'schedules'):
-                        schedules+=1
-                    elif(pt == 'constructive algorithms'):
-                        constructive_algorithms+=1
-                    elif(pt == 'greedy'):
-                        greedy+=1
-                    elif(pt == 'bitmasks'):
-                        bitmasks+=1
-                    elif(pt == 'divide and conquer'):
-                        divide_and_conquer+=1
-                    elif(pt == 'flows'):
-                        flows+=1
-                    elif(pt == 'geometry'):
-                        geometry+=1
-                    else:
-                        other_tag+=1
+                            prob_obj.other_tag=True
+                            other_tag+=1
         except:
             pass
 
