@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 
 class Question(models.Model):
+    prob_link = models.CharField(max_length=500, default='')
     prob_level = models.CharField(max_length=1)
     prob_rating = models.IntegerField()
     expression_parsing = models.BooleanField(default=False)
