@@ -30,8 +30,9 @@ def detail(request):
         ile = verdict[13]
         other = verdict[14]
         rating = verdict[15]
+        ExpressionParsing = verdict[16]
         return render(request, 'userinfo/detail.html',
                       {'exists': exists, 'user': user, 'rank': rank, 'color': color, 'ar': ar, 'institute': institute,
                        'ac': ac, 'wa': wa, 'tle': tle, 'rte': rte, 'mle': mle, 'challenged': challenged
-                          , 'cpe': cpe, 'skipped': skipped, 'ile': ile, 'other': other, 'rating': rating})
+                          , 'cpe': cpe, 'skipped': skipped, 'ile': ile, 'other': other, 'rating': rating,'ExpressionParsing':ExpressionParsing})
         # return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
