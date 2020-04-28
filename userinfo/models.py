@@ -5,8 +5,8 @@ from django.db import models
 
 class Question(models.Model):
     prob_link = models.CharField(max_length=500, default='')
-    prob_level = models.CharField(max_length=1)
-    prob_rating = models.IntegerField()
+    prob_level = models.CharField(max_length=1,default='')
+    prob_rat = models.IntegerField(default=0)
     expression_parsing = models.BooleanField(default=False)
     fft = models.BooleanField(default=False)
     two_pointers = models.BooleanField(default=False)
