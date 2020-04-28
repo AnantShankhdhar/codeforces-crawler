@@ -234,7 +234,7 @@ def scrape(username):
 
 
                 if (flag == 0):
-                    prob_obj = Question.objects.create(prob_link=ele)
+                    prob_obj = Question(prob_link=ele)
                     try:
                         int(ele[-1])
                         prob_obj.prob_level = ele[-2]
@@ -252,8 +252,8 @@ def scrape(username):
                                 prob_obj.special_problem=True
                                 special_problem+=1
                             else:
-                                prob_obj.prob_rat=pt[1:]
-                                prob_rat.append(pt[1:])
+                                prob_obj.prob_rat=int(pt[1:])
+                                prob_rat.append(int(pt[1:]))
                         elif(pt=='expression parsing'):
                             prob_obj.expression_parsing=True
                             expression_parsing+=1
@@ -365,46 +365,10 @@ def scrape(username):
                         else:
                             prob_obj.other_tag=True
                             other_tag+=1
+                    prob_obj.save()
         except:
             pass
 
-        print('expression_parsing',expression_parsing)
-        print("fft",fft)
-        print("two_pointers",two_pointers)
-        print('binary_search',binary_search)
-        print("dsu",dsu)
-        print("strings",strings)
-        print('number_theory',number_theory)
-        print('data_structures',data_structures)
-        print('hashing',hashing)
-        print('shortest_paths',shortest_paths)
-        print('matrices',matrices)
-        print('string_suffix_structures',string_suffix_structures)
-        print('graph_matchings',graph_matchings)
-        print('dp',dp)
-        print('dfs_and_similar',dfs_and_similar)
-        print('meet-in-the-middle',meet_in_the_middle)
-        print('games',games)
-        print('schedules',schedules)
-        print('constructive_algorithms',constructive_algorithms)
-        print('greedy',greedy)
-        print('bitmasks',bitmasks)
-        print('divide_and_conquer',divide_and_conquer)
-        print('flows',flows)
-        print('geometry',geometry)
-        print('math',math)
-        print('sortings',sortings)
-        print('ternary_search',ternary_search)
-        print('combinatorics',combinatorics)
-        print('brute_force',brute_force)
-        print('implementation',implementation)
-        print('2-sat',sat_2)
-        print('trees',trees)
-        print('probabilities',probabilities)
-        print('graphs',graphs)
-        print('chinese_remainder_theorem',chinese_remainder_theorem)
-        print('interactive',interactive)
-        print('Special problem',special_problem)
         print(prob_rat)
         print(type_list)
         print(lang_list)
