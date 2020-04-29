@@ -368,11 +368,13 @@ def scrape(username):
                     prob_obj.save()
         except:
             pass
+        taglist = [expression_parsing,fft,two_pointers,binary_search,dsu,strings,number_theory,data_structures,hashing,shortest_paths,matrices,string_suffix_structures,graph_matchings,dp,dfs_and_similar,meet_in_the_middle,games,schedules,constructive_algorithms,greedy,bitmasks,divide_and_conquer,flows,geometry,math,sortings,ternary_search,combinatorics,brute_force,implementation,sat_2,trees,probabilities,graphs,chinese_remainder_theorem,interactive,other_tag,special_problem]
+        print(taglist)
 
         print(prob_rat)
         print(type_list)
         print(lang_list)
-        return exists,rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other,rating,expression_parsing
+        return exists,rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other,rating,taglist,prob_rat,type_list,lang_list
     except:
         exists = False
         return exists
