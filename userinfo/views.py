@@ -44,7 +44,7 @@ def detail(request):
                       {'exists': exists, 'user': user, 'rank': rank, 'color': color, 'ar': ar, 'institute': institute,
                        'ac': ac, 'wa': wa, 'tle': tle, 'rte': rte, 'mle': mle, 'challenged': challenged
                           , 'cpe': cpe, 'skipped': skipped, 'ile': ile, 'other': other, 'rating': rating,})
-        # return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
+        #return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
 
 def signup(request):
     if request.method == 'POST':
