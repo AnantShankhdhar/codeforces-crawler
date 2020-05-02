@@ -18,6 +18,9 @@ def update_user_profile(sender, instance,created, **kwargs):
     instance.profile.save()
 
 # Create your models here.
+class ContestDb(models.Model):
+    contest_name=models.CharField(max_length=500)
+    date=models.DateField()
 
 class Question(models.Model):
     prob_link = models.CharField(max_length=500, default='')

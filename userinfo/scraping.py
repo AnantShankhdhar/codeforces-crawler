@@ -1,15 +1,76 @@
-from userinfo.models import Question
-from . import models
+from userinfo.models import Question, ContestDb
 
 def scrape(username):
     import requests
     exists = True
+
+    #For contest database
+    import datetime
+    contests_link = 'https://codeforces.com/contests'
+    rq = requests.get(contests_link)
+    from bs4 import BeautifulSoup
+    chsoup = BeautifulSoup(rq.text, "lxml")
+    page = chsoup.find('div', attrs={'class': 'pagination'}).find_all('span', attrs={'class': 'page-index'})[-1].string
+    flag=0
+    for i in range(int(page)):
+        page_link = 'https://codeforces.com/contests/page/' + str(i + 1)
+        rq1 = requests.get(page_link)
+        cpgsoup = BeautifulSoup(rq1.text, "lxml")
+        crows = cpgsoup.find_all('table')[1].find_all('tr')[1:]
+        for crow in crows:
+            rowinfo = crow.find_all('td')
+            cname = rowinfo[0]
+            for child in cname.children:
+                contest_name = child
+                break
+            contest_name=contest_name.strip()
+            date = rowinfo[2].find('span', attrs={'class': 'format-date'}).string[0:11]
+            year=int(date[7:])
+            month=date[0:3]
+            if(month=='Jan'):
+                month=1
+            elif(month=='Feb'):
+                month=2
+            elif(month=='Mar'):
+                month=3
+            elif (month == 'Apr'):
+                month = 4
+            elif (month == 'May'):
+                month = 5
+            elif (month == 'Jun'):
+                month = 6
+            elif (month == 'Jul'):
+                month = 7
+            elif (month == 'Aug'):
+                month = 8
+            elif (month == 'Sep'):
+                month = 9
+            elif (month == 'Oct'):
+                month = 10
+            elif (month == 'Nov'):
+                month = 11
+            elif (month == 'Dec'):
+                month = 12
+            day=int(date[4:6])
+            for object in ContestDb.objects.all():
+                if(object.contest_name == contest_name):
+                    flag=1
+                    break
+            if(flag==1):
+                break
+            else:
+                contest_obj = ContestDb(contest_name=contest_name, date=datetime.datetime(year,month,day))
+                contest_obj.save()
+        if(flag==1):
+            break
+
+
     try:    
         profile="https://codeforces.com/profile/"+str(username)
         sub="https://codeforces.com/submissions/"+str(username)
         r1=requests.get(profile)
         r2=requests.get(sub)
-        from bs4 import BeautifulSoup
+        #from bs4 import BeautifulSoup
         profilesoup= BeautifulSoup(r1.text,"lxml")
         subsoup= BeautifulSoup(r2.text,"lxml")
         info=profilesoup.find('div',attrs={'class':'info'})
@@ -366,6 +427,55 @@ def scrape(username):
                             prob_obj.other_tag=True
                             other_tag+=1
                     prob_obj.save()
+
+            #contests scrapping
+            contests_link = "https://codeforces.com/contests/with/" + str(username)
+            contests_l = requests.get(contests_link)
+            contests_soup = BeautifulSoup(contests_l.text, "lxml")
+            bestrank = -1
+            worstrank = 100000
+            maxsolved = -1
+            maxchange = -30000
+            minchange = 100000
+            contest_graph={}  #for line graph of contest
+
+            ranks_1 = contests_soup.find('div', attrs={'class': 'datatable'}).find('tbody').find_all('tr')
+            if (len(ranks_1) == 0):
+                print("No contests given")
+            else:
+                for rows in ranks_1:
+                    rinfo = rows.find_all('td')
+                    cno = rinfo[0].string
+                    cname = rinfo[1].find('a').string.strip()
+                    crank = rinfo[2].find('a').string.strip()
+                    bestrank = max(bestrank, int(crank))
+                    worstrank = min(worstrank, int(crank))
+                    csolved = rinfo[3].find('a').string.strip()
+                    maxsolved = max(maxsolved, int(csolved))
+                    change = rinfo[4].find('span').string
+                    maxchange = max(maxchange, int(change))
+                    minchange = min(minchange, int(change))
+                    newrating = rinfo[5].string.strip()
+                    try:
+                        promote = rinfo[6].find('div').find('span').string
+                    except:
+                        promote = ''
+                    if (promote != ''):
+                        print(promote, ' at contest ', cno)
+
+                    print(cname)
+                    for object in ContestDb.objects.all():
+                        if(object.contest_name == cname):
+                            contest_graph[object.date]=newrating
+                            print(object.date,newrating)
+                            break
+
+                print("maximum change of user :", maxchange)
+                print("minimum change of user :", minchange)
+                print("max_ques_solved: ", maxsolved)
+                print('maximum rank achived by user: ', worstrank)
+                print('minimum rank achived by user: ', bestrank)
+                print(contest_graph)
         except:
             pass
         taglist = [expression_parsing,fft,two_pointers,binary_search,dsu,strings,number_theory,data_structures,hashing,shortest_paths,matrices,string_suffix_structures,graph_matchings,dp,dfs_and_similar,meet_in_the_middle,games,schedules,constructive_algorithms,greedy,bitmasks,divide_and_conquer,flows,geometry,math,sortings,ternary_search,combinatorics,brute_force,implementation,sat_2,trees,probabilities,graphs,chinese_remainder_theorem,interactive,other_tag,special_problem]
