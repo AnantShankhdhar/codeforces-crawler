@@ -8,8 +8,6 @@ def index(request):
     return render(request, 'userinfo/index.html')
 
 
-    
-
 
 def detail(request):
     user = request.POST['user']  # user is the name of the input
@@ -39,7 +37,7 @@ def detail(request):
         RatingList = verdict[17]
         TypeList = verdict[18]
         LangList = verdict[19]
-        
+
         return render(request, 'userinfo/detail.html',
                       {'exists': exists, 'user': user, 'rank': rank, 'color': color, 'ar': ar, 'institute': institute,
                        'ac': ac, 'wa': wa, 'tle': tle, 'rte': rte, 'mle': mle, 'challenged': challenged
