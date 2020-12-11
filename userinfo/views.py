@@ -22,27 +22,18 @@ def detail(request):
         color = verdict[2]
         ar = verdict[3]
         institute = verdict[4]
-        ac = verdict[5]
-        wa = verdict[6]
-        tle = verdict[7]
-        rte = verdict[8]
-        mle = verdict[9]
-        challenged = verdict[10]
-        cpe = verdict[11]
-        skipped = verdict[12]
-        ile = verdict[13]
-        other = verdict[14]
-        rating = verdict[15]
-        Taglist = verdict[16]
-        RatingList = verdict[17]
-        TypeList = verdict[18]
-        LangList = verdict[19]
+
+        rating = verdict[5]
+        Taglist = verdict[6]
+        RatingList = verdict[7]
+        TypeList = verdict[8]
+        LangList = verdict[9]
+        VerdictList = verdict[10]
+        ac=VerdictList['OK']
 
         return render(request, 'userinfo/detail.html',
                       {'exists': exists, 'user': user, 'rank': rank, 'color': color, 'ar': ar, 'institute': institute,
-                       'ac': ac, 'wa': wa, 'tle': tle, 'rte': rte, 'mle': mle, 'challenged': challenged
-                          , 'cpe': cpe, 'skipped': skipped, 'ile': ile, 'other': other, 'rating': rating,})
-        #return render(request, 'userinfo/detail.html', {'user': user, 'verdict':verdict,})
+                        'rating': rating, 'ac':ac})
 
 def signup(request):
     if request.method == 'POST':

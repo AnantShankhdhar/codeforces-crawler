@@ -1,57 +1,47 @@
-{% load static %}
-<html>
+<!--{% load static %}-->
+<!--<html>-->
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"-->
+<!--    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+<!--  <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">-->
 
-  <title>{{user }} - {{ rank }}</title>
-</head>
+<!--  <title>{{user }} - {{ rank }}</title>-->
+<!--</head>-->
 
-<body>
-  <!-- Navbar -->
+<!--<body>-->
+<!--  &lt;!&ndash; Navbar &ndash;&gt;-->
 
-  <nav class="navbar navbar-expand-md navbar-light fixed-top py-2 p-md-0" id="main-navbar">
-    <div class="container d-flex" style="height: 100%;">
-      <div class="col-4">
-        <span>Hey, {{user }}</span>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="col collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav m-0 d-flex justify-content-around" style="width: 100%;">
+<!--  <nav class="navbar navbar-expand-md navbar-light fixed-top py-2 p-md-0" id="main-navbar">-->
+<!--    <div class="container d-flex" style="height: 100%;">-->
+<!--      <div class="col-4">-->
+<!--        <span>Hey, {{user }}</span>-->
+<!--      </div>-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="col collapse navbar-collapse" id="navbarCollapse">-->
+<!--        <ul class="navbar-nav m-0 d-flex justify-content-around" style="width: 100%;">-->
 
-          <li class="nav-item active py-md-2">
-            <a class="nav-link" href="#">Github</a>
-          </li>
+<!--          <li class="nav-item active py-md-2">-->
+<!--            <a class="nav-link" href="#">Github</a>-->
+<!--          </li>-->
 
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
 
-
-
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br>
 {% if exists == False %}
     No such username
+
 {% else %}
     User name is {{ user }}
     <br>
@@ -66,22 +56,5 @@
     {{institute}}
     <br>
     {{ac}}
-    <br>
-    {{wa}}
-    <br>
-    {{tle}}
-    <br>
-    {{rte}}
-    <br>
-    {{mle}}
-    <br>
-    {{challenged}}
-    <br>
-    {{cpe}}
-    <br>
-    {{skipped}}
-    <br>
-    {{ile}}
-    <br>
-    {{other}}
+
 {% endif %}
