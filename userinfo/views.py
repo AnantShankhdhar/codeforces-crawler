@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .scraping import scrape
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
+
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -31,9 +32,48 @@ def detail(request):
         VerdictList = verdict[10]
         ac=VerdictList['OK']
 
+        VerdictList['Accepted'] = VerdictList['OK']
+        del VerdictList['OK']
+
+
+        TypeList_label = []
+        TypeList_data = []
+
+        for i in sorted (TypeList) :
+            TypeList_data.append(TypeList[i])
+            TypeList_label.append(i)
+
+        LangList_label = []
+        LangList_data = []
+
+        for i in sorted (LangList) :
+            LangList_data.append(LangList[i])
+            LangList_label.append(i)
+
+        VerdictList_label = []
+        VerdictList_data = []
+
+        for i in sorted (VerdictList) :
+            VerdictList_data.append(VerdictList[i])
+            VerdictList_label.append(i)
+
         return render(request, 'userinfo/detail.html',
-                      {'exists': exists, 'user': user, 'rank': rank, 'color': color, 'ar': ar, 'institute': institute,
-                        'rating': rating, 'ac':ac})
+                      {'exists': exists,
+                        'user': user,
+                        'rank': rank,
+                        'color': color,
+                        'ar': ar,
+                        'institute': institute,
+                        'rating': rating,
+                        'Taglist' :Taglist ,
+                        'RatingList':RatingList ,
+                        'TypeList_label':TypeList_label ,
+                        'TypeList_data':TypeList_data ,
+                        'LangList_label':LangList_label ,
+                        'LangList_data':LangList_data ,
+                        'VerdictList_label':VerdictList_label ,
+                        'VerdictList_data':VerdictList_data ,
+                         'ac':ac})
 
 def signup(request):
     if request.method == 'POST':

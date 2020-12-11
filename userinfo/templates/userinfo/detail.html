@@ -1,18 +1,18 @@
-<!--{% load static %}-->
-<!--<html>-->
+{% load static %}
+<html>
 
-<!--<head>-->
+<head>
 <!--  <meta charset="utf-8">-->
 <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 <!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"-->
 <!--    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
 
-<!--  <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">-->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+      <!--title>{{user }} - {{ rank }}</title-->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
 
-<!--  <title>{{user }} - {{ rank }}</title>-->
-<!--</head>-->
-
-<!--<body>-->
+<body>
 <!--  &lt;!&ndash; Navbar &ndash;&gt;-->
 
 <!--  <nav class="navbar navbar-expand-md navbar-light fixed-top py-2 p-md-0" id="main-navbar">-->
@@ -56,5 +56,109 @@
     {{institute}}
     <br>
     {{ac}}
+    <br>
+    {{Taglist}}
+
+    <div class="TypeListcss">
+        <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>
+    </div>
+    <div class="LangList">
+        <canvas id="LangList"  class="LangListcss" width="400"></canvas>
+    </div>
+    <div class="VerdictList">
+        <canvas id="VerdictList"  class="VerdictListcss" width="400"></canvas>
+    </div>
+
+
+    <script>
+      var ctx = document.getElementById('TypeList').getContext('2d');
+      var TypeList = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [{% for item in TypeList_label %} '{{ item}}', {% endfor %}],
+              datasets: [{
+                  label: 'Types of Questions solved',
+                  data: [{% for item in TypeList_data %} '{{ item}}', {% endfor %}],
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+
+    </script>
+
+
+    <script>
+      var ctx = document.getElementById('LangList').getContext('2d');
+      var LangList = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+              labels: [{% for item in LangList_label %} '{{ item}}', {% endfor %}],
+              datasets: [{
+                  label: 'Types of Questions solved',
+                  data: [{% for item in LangList_data %} '{{ item}}', {% endfor %}],
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderWidth: 1
+              }]
+          }
+      });
+
+    </script>
+
+    <script>
+      var ctx = document.getElementById('VerdictList').getContext('2d');
+      var VerdictList = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [{% for item in VerdictList_label %} '{{ item}}', {% endfor %}],
+              datasets: [{
+                  label: 'Submissions Results',
+                  data: [{% for item in VerdictList_data %} '{{ item}}', {% endfor %}],
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endif %}
