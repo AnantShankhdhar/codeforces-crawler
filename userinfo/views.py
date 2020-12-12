@@ -114,7 +114,7 @@ def detail(request):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
             #i = datetime.datetime.fromtimestamp(i).strftime('%c')
             contestTimegood.append(t)
-            print(t)
+            #print(t)
             #print(i)
 
         return render(request, 'userinfo/detail.html',
