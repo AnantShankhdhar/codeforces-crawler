@@ -41,23 +41,15 @@
 
 {% if exists == False %}
     No such username
-
+{% elif contests_given == False %}
+    No contest given
 {% else %}
     User name is {{ user }}
     <br>
-    {{ rank }}
+    {{ name }}
     <br>
-    {{rating}}
+    {{ rating }}
     <br>
-    {{color}}
-    <br>
-    {{ar}}
-    <br>
-    {{institute}}
-    <br>
-    {{ac}}
-    <br>
-    {{Taglist}}
 
     <div class="TypeListcss">
         <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>

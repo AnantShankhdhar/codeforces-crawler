@@ -17,19 +17,54 @@ def detail(request):
     if verdict == False:
         exists = verdict
         return render(request, 'userinfo/detail.html', {'exists': exists})
+    elif verdict[1] == False:
+        exists = verdict[0]
+        contests_given = verdict[1]
+        name = verdict[2]
+        rating = verdict[3]
+        maxrating = verdict[4]
+        country = verdict[5]
+        city = verdict[6]
+        organisation = verdict[7]
+        rank = verdict[8]
+        maxrank = verdict[9]
+
+        Taglist = verdict[10]
+        ProbRat = verdict[11]
+        TypeList = verdict[12]
+        LangList = verdict[13]
+        VerdictList = verdict[14]
+        return  render(request, 'userinfo/detail.html',
+                       {'exists': exists,
+                        'contests_given': contests_given,
+                        'name': name,
+                        'rating':rating}
+                       )
     else:
         exists = verdict[0]
-        rank = verdict[1]
-        color = verdict[2]
-        ar = verdict[3]
-        institute = verdict[4]
+        contests_given = verdict[1]
+        name = verdict[2]
+        rating = verdict[3]
+        maxrating = verdict[4]
+        country = verdict[5]
+        city = verdict[6]
+        organisation = verdict[7]
+        rank = verdict[8]
+        maxrank = verdict[9]
 
-        rating = verdict[5]
-        Taglist = verdict[6]
-        RatingList = verdict[7]
-        TypeList = verdict[8]
-        LangList = verdict[9]
-        VerdictList = verdict[10]
+        Taglist = verdict[10]
+        ProbRat = verdict[11]
+        TypeList = verdict[12]
+        LangList = verdict[13]
+        VerdictList = verdict[14]
+
+        contestTime = verdict[15]
+        ranks = verdict[16]
+        oldRatings = verdict[17]
+        newRatings = verdict[18]
+        bestRank = verdict[19]
+        worstRank = verdict[20]
+
         ac=VerdictList['OK']
 
         VerdictList['Accepted'] = VerdictList['OK']
@@ -59,21 +94,10 @@ def detail(request):
 
         return render(request, 'userinfo/detail.html',
                       {'exists': exists,
-                        'user': user,
-                        'rank': rank,
-                        'color': color,
-                        'ar': ar,
-                        'institute': institute,
-                        'rating': rating,
-                        'Taglist' :Taglist ,
-                        'RatingList':RatingList ,
-                        'TypeList_label':TypeList_label ,
-                        'TypeList_data':TypeList_data ,
-                        'LangList_label':LangList_label ,
-                        'LangList_data':LangList_data ,
-                        'VerdictList_label':VerdictList_label ,
-                        'VerdictList_data':VerdictList_data ,
-                         'ac':ac})
+                       'contests_given': contests_given,
+                       'name': name,
+                       'rating': rating}
+                      )
 
 def signup(request):
     if request.method == 'POST':
