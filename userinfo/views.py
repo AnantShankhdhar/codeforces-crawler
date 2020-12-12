@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from .scraping import scrape
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
-
+import datetime
+import time
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -52,8 +53,8 @@ def detail(request):
         rank = verdict[8]
         maxrank = verdict[9]
 
-        Taglist = verdict[10]
-        ProbRat = verdict[11]
+        TagList = verdict[10]
+        ProbRatList = verdict[11]
         TypeList = verdict[12]
         LangList = verdict[13]
         VerdictList = verdict[14]
@@ -85,18 +86,59 @@ def detail(request):
             LangList_data.append(LangList[i])
             LangList_label.append(i)
 
+        ProbRatList_label = []
+        ProbRatList_data = []
+
+        for i in sorted (ProbRatList) :
+            ProbRatList_data.append(ProbRatList[i])
+            ProbRatList_label.append(i)
+
         VerdictList_label = []
         VerdictList_data = []
 
-        for i in sorted (VerdictList) :
-            VerdictList_data.append(VerdictList[i])
-            VerdictList_label.append(i)
+        VerdictList = dict([(value, key) for key, value in VerdictList.items()])
+        for i in sorted (VerdictList, reverse= True) :
+            VerdictList_label.append(VerdictList[i])
+            VerdictList_data.append(i)
+
+        TagList_label = []
+        TagList_data = []
+
+        TagList = dict([(value, key) for key, value in TagList.items()])
+        for i in sorted (TagList, reverse=True) :
+            TagList_label.append(TagList[i])
+            TagList_data.append(i)
+
+        contestTimegood = []
+        for i in (contestTime):
+            t = time.strftime('%Y-%m-%d', time.localtime(i))
+            #i = datetime.datetime.fromtimestamp(i).strftime('%c')
+            contestTimegood.append(t)
+            print(t)
+            #print(i)
 
         return render(request, 'userinfo/detail.html',
-                      {'exists': exists,
-                       'contests_given': contests_given,
-                       'name': name,
-                       'rating': rating}
+                      {
+                      'exists': exists,
+                      'contests_given': contests_given,
+                      'name': name,
+                      'rating': rating,
+                      'contestTime':contestTime,
+                      'contestTimegood':contestTimegood,
+                      'ranks':ranks,
+                      'newRatings':newRatings,
+                      'bestRank': bestRank,
+                      'TagList_data':TagList_data,
+                      'TagList_label':TagList_label,
+                      'ProbRatList_data':ProbRatList_data,
+                      'ProbRatList_label':ProbRatList_label,
+                      'TypeList_data':TypeList_data,
+                      'TypeList_label':TypeList_label,
+                      'VerdictList_data':VerdictList_data,
+                      'VerdictList_label':VerdictList_label,
+                      'LangList_data':LangList_data,
+                      'LangList_label':LangList_label
+                       }
                       )
 
 def signup(request):

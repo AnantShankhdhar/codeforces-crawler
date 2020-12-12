@@ -50,6 +50,8 @@
     <br>
     {{ rating }}
     <br>
+    <br>
+    {{ bestRank }}
 
     <div class="TypeListcss">
         <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>
@@ -60,6 +62,15 @@
     <div class="VerdictList">
         <canvas id="VerdictList"  class="VerdictListcss" width="400"></canvas>
     </div>
+    <div class="ProbRatList">
+        <canvas id="ProbRatList"  class="ProbRatcss" width="400"></canvas>
+    </div>
+    <div class="TagList">
+        <canvas id="TagList"  class="TagListcss" width="400"></canvas>
+    </div>
+    <div class="RatingRankGraph">
+        <canvas id="RatingRankGraph"  class="RatingRankGraphcss" width="400"></canvas>
+    </div>
 
 
     <script>
@@ -69,7 +80,7 @@
           data: {
               labels: [{% for item in TypeList_label %} '{{ item}}', {% endfor %}],
               datasets: [{
-                  label: 'Types of Questions solved',
+                  label: 'Level of Questions solved',
                   data: [{% for item in TypeList_data %} '{{ item}}', {% endfor %}],
                   backgroundColor: 'rgba(54, 162, 235, 0.2)',
                   borderColor: 'rgba(54, 162, 235, 1)',
@@ -133,6 +144,107 @@
       });
     </script>
 
+    <script>
+      var ctx = document.getElementById('ProbRatList').getContext('2d');
+      var ProbRatList = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: [{% for item in ProbRatList_label %} '{{ item}}', {% endfor %}],
+                      datasets: [
+                            {
+                              label: 'Rating of Questions solved',
+                              data: [{% for item in ProbRatList_data %} '{{ item}}', {% endfor %}],
+                              fill: 'origin',
+                              backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                              borderColor: 'rgba(153, 102, 255, 1)'
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        plugins: {
+                            filler: {
+                                propagate: true
+                            }
+                        }
+                    }
+                });
+    </script>
+
+    <script>
+
+        var ctx = document.getElementById('TagList').getContext('2d');
+        var TagList = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: [{% for item in TagList_label %} '{{ item}}', {% endfor %}],
+                datasets: [{
+                    label: 'Tags of Questions solved',
+                    data: [{% for item in TagList_data %} '{{ item}}', {% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+
+    <script>
+      var ctx = document.getElementById('RatingRankGraph').getContext('2d');
+      var RatingRankGraph = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: [{% for item in contestTimegood %} '{{ item}}', {% endfor %}],
+                      datasets: [
+                          {
+                            label: 'Ranks in Contest',
+                            data: [{% for item in ranks %} '{{ item}}', {% endfor %}],
+                            fill: 'false',
+                            fillColor: "rgba(153, 102, 255, 0.2)",
+                            strokeColor: "rgba(153, 102, 255, 0.2)",
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            borderColor: 'rgba(153, 102, 255, 1)'
+                          },
+                          {
+                            label: 'Rating after Contest',
+                            data: [{% for item in newRatings %} '{{ item}}', {% endfor %}],
+                            fill: 'false',
+                            fillColor: "rgba(255, 99, 132, 0.2)",
+                            strokeColor: "rgba(255, 99, 132, 0.2)",
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)'
+                          }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                stacked: false
+                            }]
+                        },
+                        plugins: {
+                            filler: {
+                                propagate: true
+                            }
+                        }
+                    }
+
+                });
+    </script>
 
 </body>
 </html>
