@@ -1,0 +1,324 @@
+{% load static %}
+<html>
+
+<head>
+<!--  <meta charset="utf-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"-->
+<!--    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
+
+      <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+      <!--title>{{user }} - {{ rank }}</title-->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+<!--  &lt;!&ndash; Navbar &ndash;&gt;-->
+
+<!--  <nav class="navbar navbar-expand-md navbar-light fixed-top py-2 p-md-0" id="main-navbar">-->
+<!--    <div class="container d-flex" style="height: 100%;">-->
+<!--      <div class="col-4">-->
+<!--        <span>Hey, {{user }}</span>-->
+<!--      </div>-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+<!--      <div class="col collapse navbar-collapse" id="navbarCollapse">-->
+<!--        <ul class="navbar-nav m-0 d-flex justify-content-around" style="width: 100%;">-->
+
+<!--          <li class="nav-item active py-md-2">-->
+<!--            <a class="nav-link" href="#">Github</a>-->
+<!--          </li>-->
+
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+{% if exists == False %}
+    one of the username is not valid
+{% elif contests_given == False %}
+    No contest given
+{% else %}
+    User name is {{ Firstuser }}
+    <br>
+    {{ Firstname }}
+    <br>
+    {{ Firstrating }}
+    <br>
+    <br>
+    {{ FirstbestRank }}
+    <br>
+    User name is {{ Seconduser }}
+    <br>
+    {{ Secondname }}
+    <br>
+    {{ Secondrating }}
+    <br>
+    <br>
+    {{ SecondbestRank }}
+
+
+      <div class="TypeListcss">
+          <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>
+      </div>
+      <div class="LangList">
+          <canvas id="LangList"  class="LangListcss" width="400"></canvas>
+      </div>
+      <div class="VerdictList">
+          <canvas id="VerdictList"  class="VerdictListcss" width="400"></canvas>
+      </div>
+      <div class="ProbRatList">
+          <canvas id="ProbRatList"  class="ProbRatcss" width="400"></canvas>
+      </div>
+      <div class="TagList">
+          <canvas id="TagList"  class="TagListcss" width="400"></canvas>
+      </div>
+      <div class="RatingGraph">
+          <canvas id="RatingGraph"  class="RatingGraphcss" width="400"></canvas>
+      </div>
+
+
+      <script>
+        var ctx = document.getElementById('TypeList').getContext('2d');
+        var TypeList = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                datasets: [
+                  {
+                    data: [{% for item in FirstTypeList_data %} '{{ item}}', {% endfor %}],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                    label: ['{{Firstuser}}'],
+                    labels: [{% for item in FirstTypeList_label %} '{{ item}}', {% endfor %}]
+                  },
+                  {
+                    data: [{% for item in SecondTypeList_data %} '{{ item}}', {% endfor %}],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                    label: ['{{Seconduser}}'],
+                    labels: [{% for item in SecondTypeList_label %} '{{ item}}', {% endfor %}]
+                  }
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var index = tooltipItem.index;
+                            return dataset.labels[index] + ': ' + dataset.data[index];
+                        }
+                    }
+                }
+            }
+        });
+
+      </script>
+
+
+      <script>
+        var ctx = document.getElementById('LangList').getContext('2d');
+        var LangList = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for item in LangList_label %} '{{ item}}', {% endfor %}],
+                datasets: [{
+                    label: 'Types of Questions solved',
+                    data: [{% for item in LangList_data %} '{{ item}}', {% endfor %}],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+      </script>
+
+      <script>
+        var ctx = document.getElementById('VerdictList').getContext('2d');
+        var VerdictList = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for item in VerdictList_label %} '{{ item}}', {% endfor %}],
+                datasets: [{
+                    label: 'Submissions Results',
+                    data: [{% for item in VerdictList_data %} '{{ item}}', {% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+      </script>
+
+      <script>
+        var ctx = document.getElementById('ProbRatList').getContext('2d');
+        var ProbRatList = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                        labels: [{% for item in ProbRatList_label %} '{{ item}}', {% endfor %}],
+                        datasets: [
+                              {
+                                label: 'Rating of Questions solved',
+                                data: [{% for item in ProbRatList_data %} '{{ item}}', {% endfor %}],
+                                fill: 'origin',
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderColor: 'rgba(153, 102, 255, 1)'
+                              }
+                          ]
+                      },
+                      options: {
+                          scales: {
+                              yAxes: [{
+                                  stacked: true
+                              }]
+                          },
+                          plugins: {
+                              filler: {
+                                  propagate: true
+                              }
+                          }
+                      }
+                  });
+      </script>
+
+      <script>
+
+          var ctx = document.getElementById('TagList').getContext('2d');
+          var TagList = new Chart(ctx, {
+              type: 'horizontalBar',
+              data: {
+                  labels: [{% for item in TagList_label %} '{{ item}}', {% endfor %}],
+                  datasets: [{
+                      label: 'Tags of Questions solved',
+                      data: [{% for item in TagList_data %} '{{ item}}', {% endfor %}],
+                      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                      borderColor: 'rgba(54, 162, 235, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
+                  }
+              }
+          });
+
+      </script>
+
+      <script>
+      const chartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            tooltips: {
+                intersect: false,
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        const dataset = data.datasets[tooltipItem.datasetIndex];
+                        const index = tooltipItem.index;
+                        return dataset.labels[index] + ': $' + dataset.data[index];
+                    }
+                }
+            }
+          };
+
+          const chartData = {
+            labels: window.sellerChartData.labelsDayName,
+            datasets: [
+                {
+                    label: '{{ Firstuser }}',
+                    fill: false,
+                    backgroundColor: 'rgba(132, 94, 247, .3)',
+                    borderColor: 'transparent',
+                    pointBackgroundColor: 'rgba(132, 94, 247, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(132, 94, 247, 1)',
+                    data: window.sellerChartData.dataThisWeek,
+                    labels: window.sellerChartData.labelsThisWeek
+                },
+                {
+                    label: '{{Seconduser }}',
+                    fill: false,
+                    backgroundColor: 'rgba(233, 236, 239, 1)',
+                    borderColor: 'transparent',
+                    pointBackgroundColor: 'rgba(233, 236, 239, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(233, 236, 239, 1)',
+                    data: window.sellerChartData.dataLastWeek,
+                    labels: window.sellerChartData.labelsLastWeek
+                  }
+              ]
+          };
+          var ctx = document.getElementById('RatingGraph').getContext('2d');
+          var RatingGraph = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: [{% for item in contestTimegood %} '{{ item}}', {% endfor %}],
+                      datasets: [
+                          {
+                            label: 'Ranks in Contest',
+                            data: [{% for item in ranks %} '{{ item}}', {% endfor %}],
+                            fill: 'false',
+                            fillColor: "rgba(153, 102, 255, 0.2)",
+                            strokeColor: "rgba(153, 102, 255, 0.2)",
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            borderColor: 'rgba(153, 102, 255, 1)'
+                          },
+                          {
+                            label: 'Rating after Contest',
+                            data: [{% for item in newRatings %} '{{ item}}', {% endfor %}],
+                            fill: 'false',
+                            fillColor: "rgba(255, 99, 132, 0.2)",
+                            strokeColor: "rgba(255, 99, 132, 0.2)",
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)'
+                          }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                stacked: false
+                            }]
+                        },
+                        plugins: {
+                            filler: {
+                                propagate: true
+                            }
+                        }
+                    }
+
+                });
+
+      </script>
+
+  </body>
+  </html>
+
+
+
+
+
+
+{% endif %}
