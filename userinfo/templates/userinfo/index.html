@@ -11,5 +11,44 @@
     </label><br>
     <input type="text" id="handle" name="user" /><br>
     <input type="submit" value="Submit">
-    <a href="{% url 'userinfo:inputCompares' %}">Compare From another user</a>
+
+</form>
+
+<form action="{% url 'userinfo:Compares' %}" method="post">
+    {% csrf_token %}
+    <label for="Firsthandle">
+            User handle First:
+    </label>
+    <br>
+    <input type="text" id="Firsthandle" name="Firstuser"/>
+    <br>
+    <label for="Secondhandle">
+            User handle Second:
+    </label>
+    <br>
+    <input type="text" id="Secondhandle" name="Seconduser"/>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<form action="{% url 'userinfo:teamrate' %}" method="post">
+    {% csrf_token %}
+    <label for="handle1">
+            User handle1:
+    </label><br>
+    <input type="text" id="handle1" name="user1" /><br>
+    <label for="handle2">
+            User handle2:
+    </label><br>
+    <input type="text" id="handle2" name="user2" /><br>
+    <label for="handle3">
+            User handle3:
+    </label><br>
+    <input type="text" id="handle3" name="user3" /><br>
+    <label for="handle4">
+            User handle4:
+    </label><br>
+    <input type="text" id="handle4" name="user4" /><br>
+    <input type="submit" value="Submit">
+
 </form>

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from .scraping import scrape
+from .scraping import scrape,only_rating
+from .teamrate import team_ratings
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 import datetime
@@ -35,6 +36,12 @@ def detail(request):
         TypeList = verdict[12]
         LangList = verdict[13]
         VerdictList = verdict[14]
+
+        VCList = verdict[15]
+        RecentList = verdict[16]
+        ProbRecommended = verdict[17]
+        TagListAvg = verdict[18]
+
         return  render(request, 'userinfo/detail.html',
                        {'exists': exists,
                         'contests_given': contests_given,
@@ -66,7 +73,10 @@ def detail(request):
         bestRank = verdict[19]
         worstRank = verdict[20]
 
-        ac=VerdictList['OK']
+        VCList = verdict[21]
+        RecentList = verdict[22]
+        ProbRecommended = verdict[23]
+        TagListAvg = verdict[24]
 
         VerdictList['Accepted'] = VerdictList['OK']
         del VerdictList['OK']
@@ -140,10 +150,6 @@ def detail(request):
                       'LangList_label':LangList_label
                        }
                       )
-
-def inputCompares(request):
-    return render(request, 'userinfo/inputcompares.html')
-
 
 def Compares(request):
     Firstuser = request.POST['Firstuser']
@@ -357,10 +363,78 @@ def Compares(request):
                       )
 
 
+def teamrate(request):
+    users=[]
+    try:
+        user1 = request.POST['user1']
+        users.append(user1)
+    except:
+        pass
+    try:
+        user2 = request.POST['user2']
+        users.append(user2)
+    except:
+        pass
+    try:
+        user3 = request.POST['user3']
+        users.append(user3)
+    except:
+        pass
+    try:
+        user4 = request.POST['user4']
+        users.append(user4)
+    except:
+        pass
 
+    error = False
+    if(len(users)==0):
+        error=True
+        return render(request,'userinfo/teamrate.html',
+                    {'error':error})
+    verdict=only_rating(users)
+    Exists=verdict[0]
+    NotExists=verdict[1]
+    UsersRating=verdict[2]
+    answer=team_ratings(UsersRating)
 
+    if answer<=1199:
+        rank='Newbie'
+        color='Grey'
+    elif answer<=1399:
+        rank='Pupil'
+        color='Green'
+    elif answer<=1599:
+        rank='Specialist'
+        color='Cyan'
+    elif answer<=1899:
+        rank='Expert'
+        color='Blue'
+    elif answer<=2099:
+        rank='Candidate Master'
+        color='Purple'
+    elif answer<=2299:
+        rank='Master'
+        color='Orange'
+    elif answer<=2399:
+        rank='International Master'
+        color='Orange'
+    elif answer<=2599:
+        rank='Grandmaster'
+        color='Red'
+    elif answer<=2999:
+        rank='International Grandmaster'
+        color='Red'
+    else:
+        rank='Legendary Grandmaster'
+        color='BRed'
 
-
+    return render(request, 'userinfo/teamrate.html',
+                  {'error':error,
+                   'exists':Exists,
+                   'notexists':NotExists,
+                   'answer':answer,
+                   'rank':rank,
+                   'color':color})
 
 
 def signup(request):

@@ -1,3 +1,26 @@
+def only_rating(users):
+    import requests
+    import json
+    api_url = "https://codeforces.com/api/"
+
+    exists=[]
+    not_exists=[]
+    users_rating=[]
+    for user in users:
+        info = requests.get(api_url + "user.info?handles=" + user)
+        if (info.json()['status'] != 'OK'):
+            not_exists.append(user)
+        else:
+            info_results = info.json()['result'][0]
+            exists.append(user)
+            try:
+                rating = info_results['rating']
+            except:
+                rating = 0
+            users_rating.append(rating)
+
+    return exists,not_exists,users_rating
+
 def scrape(username):
     import requests
     import json
@@ -56,6 +79,7 @@ def scrape(username):
         type_list={}
         lang_list={}
         prob_list=[]
+        prob_list_contest=[]
 
         submissions = requests.get(api_url + "user.status?handle=" + username)
         submissions_results = submissions.json()['result']
@@ -108,6 +132,8 @@ def scrape(username):
                 type = problem['index']
                 contestId = problem['contestId']
                 prob_list.append(str(contestId)+type)
+                if contestId not in prob_list_contest:
+                    prob_list_contest.append(contestId)
 
                 #type_list
                 type = problem['index'][0]
@@ -190,20 +216,21 @@ def scrape(username):
                 worstRank=max(worstRank,result['rank'])
                 oldratings.append(result['oldRating'])
                 newratings.append(result['newRating'])
-                contest_list.append(result['contestId'])
+                #contest_list.append(result['contestId'])
 
         else:
             contest_given=False
 
         #VC recommendation
         #contest_list has all given contests
+        # prob_list_contest contains contest with atleast one solved
         vc_list=[]
         all_contest = requests.get(api_url + "contest.list?gym=false")
         all_contest_results = all_contest.json()['result']
         for i in range(len(all_contest_results)):
             if i%5==0:
                 contestId=all_contest_results[i]['id']
-                if contestId not in contest_list:
+                if (contestId not in prob_list_contest):
                     contest_name=all_contest_results[i]['name']
                     vc_list.append([contest_name,contestId])
                     if len(vc_list)==5:
