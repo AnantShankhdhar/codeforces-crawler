@@ -119,6 +119,17 @@ def detail(request):
             TagList_label.append(TagList[i])
             TagList_data.append(i)
 
+        TagListAvg_label = []
+        TagListAvg_data = []
+
+        TagListAvg = dict([(value, key) for key, value in TagListAvg.items()])
+        for i in sorted (TagListAvg, reverse=True) :
+            TagListAvg_label.append(TagListAvg[i])
+            TagListAvg_data.append(i)
+
+        TagListAvg_label.append('')
+        TagListAvg_data.append(0)
+
         contestTimegood = []
         for i in (contestTime):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
@@ -138,8 +149,15 @@ def detail(request):
                       'ranks':ranks,
                       'newRatings':newRatings,
                       'bestRank': bestRank,
+                      'TagList': TagList,
                       'TagList_data':TagList_data,
                       'TagList_label':TagList_label,
+                      'TagListAvg_data':TagListAvg_data,
+                      'TagListAvg_label':TagListAvg_label,
+                      'VCList':VCList,
+                      'RecentList':RecentList,
+                      'ProbRecommended':ProbRecommended,
+                      'TagListAvg':TagListAvg,
                       'ProbRatList_data':ProbRatList_data,
                       'ProbRatList_label':ProbRatList_label,
                       'TypeList_data':TypeList_data,
