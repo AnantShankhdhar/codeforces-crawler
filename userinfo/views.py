@@ -77,6 +77,7 @@ def detail(request):
         RecentList = verdict[22]
         ProbRecommended = verdict[23]
         TagListAvg = verdict[24]
+        FirstTimeChange = verdict[25]
 
         VerdictList['Accepted'] = VerdictList['OK']
         del VerdictList['OK']
@@ -106,27 +107,28 @@ def detail(request):
         VerdictList_label = []
         VerdictList_data = []
 
-        VerdictList = dict([(value, key) for key, value in VerdictList.items()])
-        for i in sorted (VerdictList, reverse= True) :
-            VerdictList_label.append(VerdictList[i])
-            VerdictList_data.append(i)
+        VerdictList = dict(sorted(VerdictList.items(), key=lambda item: item[1],reverse=True))
+        for i in VerdictList:
+            VerdictList_label.append(i)
+            VerdictList_data.append(VerdictList[i])
 
         TagList_label = []
         TagList_data = []
-
-        TagList = dict([(value, key) for key, value in TagList.items()])
-        for i in sorted (TagList, reverse=True) :
-            TagList_label.append(TagList[i])
-            TagList_data.append(i)
-
+        #print(TagList)
+        TagList = dict(sorted(TagList.items(), key=lambda item: item[1], reverse=True))
+        for i in TagList:
+            TagList_label.append(i)
+            TagList_data.append(TagList[i])
+        #print(TagList)
         TagListAvg_label = []
         TagListAvg_data = []
 
-        TagListAvg = dict([(value, key) for key, value in TagListAvg.items()])
-        for i in sorted (TagListAvg, reverse=True) :
-            TagListAvg_label.append(TagListAvg[i])
-            TagListAvg_data.append(i)
-
+        #print(TagListAvg)
+        TagListAvg = dict(sorted(TagListAvg.items(), key=lambda item: item[1], reverse=True))
+        for i in TagListAvg:
+            TagListAvg_label.append(i)
+            TagListAvg_data.append(TagListAvg[i])
+        #print(TagListAvg)
         TagListAvg_label.append('')
         TagListAvg_data.append(0)
 

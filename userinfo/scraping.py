@@ -144,11 +144,12 @@ def scrape(username):
 
         for tags in tag_list_count:
             k=(tag_list_sum[tags])/(tag_list_count[tags])
-            k=k/100
-            if(k-math.floor(k)>0.5):
-                tag_list_avg[tags]=math.floor(k)*100+100
-            else:
-                tag_list_avg[tags]=math.floor(k)*100
+            # k=k/100
+            # if(k-math.floor(k)>0.5):
+            #     tag_list_avg[tags]=math.floor(k)*100+100
+            # else:
+            #     tag_list_avg[tags]=math.floor(k)*100
+            tag_list_avg[tags]=int(k)
 
         sort_tag_list=tag_list_avg
         sort_tag_list=dict(sorted(sort_tag_list.items(), key=lambda item: item[1]))
@@ -199,7 +200,11 @@ def scrape(username):
 
         #Contests information
         contest_given=True
-        contest_list=[]
+        cutoffs=[0,1200,1400,1600,1900,2100,2300,2400,2600,3000,5000]
+        flag=[0,0,0,0,0,0,0,0,0,0]
+        became=["Newbie","Pupil","Specialist","Expert","Candidate Master","Master","International Master","Grandmaster","International Grandmaster","Legendary Grandmaster"]
+        first_time_change=[]
+
         ratings = requests.get(api_url + "user.rating?handle=" + username)
         rating_results = ratings.json()['result']
         if len(rating_results)!=0:
@@ -209,6 +214,7 @@ def scrape(username):
             ranks = []
             oldratings = []
             newratings = []
+            it=0
             for result in rating_results:
                 contest_time.append(result['ratingUpdateTimeSeconds'])
                 ranks.append(result['rank'])
@@ -216,7 +222,12 @@ def scrape(username):
                 worstRank=max(worstRank,result['rank'])
                 oldratings.append(result['oldRating'])
                 newratings.append(result['newRating'])
-                #contest_list.append(result['contestId'])
+                it+=1
+                for i in range(10):
+                    if (result['newRating']>=cutoffs[i]) and (result['newRating']<cutoffs[i+1]) and (flag[i]==0):
+                        flag[i]=1
+                        first_time_change.append("Became "+became[i]+" in contest "+str(it))
+                        print("Became ",became[i]," in contest ",it)
 
         else:
             contest_given=False
@@ -228,10 +239,11 @@ def scrape(username):
         all_contest = requests.get(api_url + "contest.list?gym=false")
         all_contest_results = all_contest.json()['result']
         for i in range(len(all_contest_results)):
-            if i%5==0:
+            if i%5==0 and i>15:
                 contestId=all_contest_results[i]['id']
-                if (contestId not in prob_list_contest):
-                    contest_name=all_contest_results[i]['name']
+                phase=all_contest_results[i]['phase']
+                contest_name = all_contest_results[i]['name']
+                if (contestId not in prob_list_contest) and (phase == "FINISHED") and (contest_name[0:10]=="Codeforces" or contest_name[0:11]=="Educational"):
                     vc_list.append([contest_name,contestId])
                     if len(vc_list)==5:
                         break
@@ -240,7 +252,7 @@ def scrape(username):
             return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,vc_list,recent_list,prob_recommended,tag_list_avg
 
         print("vc_list=",vc_list)
-        print("recent_list=",recent_list)
-        print("prob_recommended=",prob_recommended)
-        print("tag_list_avg=",tag_list_avg)
-        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg
+        # print("recent_list=",recent_list)
+        # print("prob_recommended=",prob_recommended)
+        # print("tag_list_avg=",tag_list_avg)
+        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change
