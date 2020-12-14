@@ -152,9 +152,18 @@ def detail(request):
                       )
 
 def Compares(request):
-    Firstuser = request.POST['Firstuser']
-    Seconduser = request.POST['Seconduser']
-    # rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other = scrape(user)
+    error = False
+    try:
+        Firstuser = request.POST['Firstuser']
+    except:
+        error = True
+    try:
+        Seconduser = request.POST['Seconduser']
+    except:
+        error = True
+    if error == True:
+        return render(request,'userinfo/compares.html',{'error':error})
+
     Firstverdict = scrape(Firstuser)
     Secondverdict = scrape(Seconduser)
     if Firstverdict == False or Secondverdict==False:
@@ -428,9 +437,11 @@ def teamrate(request):
         rank='Legendary Grandmaster'
         color='BRed'
 
+    length=len(NotExists)
+
     return render(request, 'userinfo/teamrate.html',
                   {'error':error,
-                   'exists':Exists,
+                   'length':length,
                    'notexists':NotExists,
                    'answer':answer,
                    'rank':rank,

@@ -1,6 +1,19 @@
-{{ answer }}
-<br>
-{{ rank }}
-<br>
-{{ color }}
-<br>
+{% if error == True %}
+    Enter atleast 1 username
+{% else %}
+    {{ answer }}
+    <br>
+    {{ rank }}
+    <br>
+    {{ color }}
+    <br>
+    {{ length }}
+    <br>
+    {% if length != 0 %}
+        (The following users doesn't exists-
+        {% for ne in notexists %}
+            {{ ne }}
+        {% endfor %}
+        .)
+    {% endif %}
+{% endif %}
