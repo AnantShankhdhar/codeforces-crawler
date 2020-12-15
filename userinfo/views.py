@@ -129,8 +129,6 @@ def detail(request):
             TagListAvg_label.append(i)
             TagListAvg_data.append(TagListAvg[i])
         #print(TagListAvg)
-        TagListAvg_label.append('')
-        TagListAvg_data.append(0)
 
         contestTimegood = []
         for i in (contestTime):
@@ -142,6 +140,12 @@ def detail(request):
 
         return render(request, 'userinfo/detail.html',
                       {
+                      'maxrating':maxrating,
+                      'country':country,
+                      'city':city,
+                      'organisation':organisation,
+                      'rank':rank,
+                      'maxrank':maxrank,
                       'exists': exists,
                       'contests_given': contests_given,
                       'name': name,

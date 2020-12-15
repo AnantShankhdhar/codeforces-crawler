@@ -6,10 +6,12 @@
 <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 <!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"-->
 <!--    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
-
-      <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+      <link rel="stylesheet" href="{% static 'css/detail.css'%}" type="text/css">
       <!--title>{{user }} - {{ rank }}</title-->
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+      <title>Welcome, {{ user }}</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -44,26 +46,79 @@
 {% elif contests_given == False %}
     No contest given
 {% else %}
-    User name is {{ user }}
-    <br>
-    {{ name }}
-    <br>
-    {{ rating }}
-    <br>
-    <br>
-    {{ bestRank }}
-    <br>
-    {{VCList}}
-    <br>
-    {{RecentList}}
-    <br>
-    {{ProbRecommended}}
-    <br>
+<br><br>
+<div class="wrapper">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 card">
+        <span class="info">
+          <p class="ques" style="display:inline">User name: </p>
+          <p class="ans" style="display:inline">{{ user }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">Name: </p>
+          <p class="ans" style="display:inline; text-transform: uppercase;">{{ name }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">Rating: </p>
+          <p class="ans" style="display:inline">{{ rating }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">Maximum Rating: </p>
+          <p class="ans" style="display:inline">{{ maxrating }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">city: </p>
+          <p class="ans" style="display:inline">{{ city }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">country: </p>
+          <p class="ans" style="display:inline">{{ country }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">organisation: </p>
+          <p class="ans" style="display:inline">{{ organisation }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">Rank: </p>
+          <p class="ans" style="display:inline">{{ rank }} </p>
+        </span>
+        <span class="info">
+          <p class="ques" style="display:inline">Maximum Rank: </p>
+          <p class="ans" style="display:inline">{{ maxrank }} </p>
+        </span>
 
-    {{TagListAvg}}
-    <br>
-    {{TagList}}
+    </div>
+    <div class="col-md-1">
 
+    </div>
+    <div class="col-md-8 ">
+      <div class="row card">
+        <h2 class="recommendation">Virtual Contest Recommendations</h2>
+        {% for key,value in VCList %}
+          <a href="https://codeforces.com/contestRegistration/{{value}}/virtual/true" style="display:inline">{{ key }}</a>
+        {% endfor %}
+
+      </div>
+      <br>
+      <div class="row card">
+        <h2 class="recommendation">Problems Recommendation</h2>
+
+          <p style="display:inline">
+            {% for i in ProbRecommended %}
+              <a href="https://codeforces.com/problemset/problem/{{i.1}}/{{i.2}}" style="display:inline">{{ i.0 }}</a> ,
+            {% endfor %}
+          </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+  </div>
+</div>
+</div>
     <div class="TypeListcss">
         <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>
     </div>
