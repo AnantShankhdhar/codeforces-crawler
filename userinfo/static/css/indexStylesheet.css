@@ -7,7 +7,9 @@
   font-weight: 500;
   font-style: 16px;
 }
-
+body{
+  background-color: #eaeae1;
+}
 .card{
   border-radius: 4px;
   padding-left: 10px;
@@ -33,4 +35,9 @@
   align-content: center;
   align-self: center;
   text-align: center;
+}
+
+.card p{
+  color:red;
+  font-size: 12px;
 }

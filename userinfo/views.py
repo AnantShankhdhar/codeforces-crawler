@@ -394,32 +394,41 @@ def teamrate(request):
     users=[]
     try:
         user1 = request.POST['user1']
-        users.append(user1)
+        if user1 != '':
+            users.append(user1)
     except:
         pass
     try:
         user2 = request.POST['user2']
-        users.append(user2)
+        if user2 != '':
+            users.append(user2)
     except:
         pass
     try:
         user3 = request.POST['user3']
-        users.append(user3)
+        if user3 != '':
+            users.append(user3)
     except:
         pass
     try:
         user4 = request.POST['user4']
-        users.append(user4)
+        if user4 != '':
+            users.append(user4)
     except:
         pass
 
-    error = False
+    
     if(len(users)==0):
-        error=True
-        return render(request,'userinfo/teamrate.html',
-                    {'error':error})
+        errorMsg="Provide atleast 1 valid input"
+        return render(request,'userinfo/index.html',
+                    {'error':errorMsg})
     verdict=only_rating(users)
     Exists=verdict[0]
+    if len(Exists)==0:
+        errorMsg="Provide atleast 1 valid input"
+        return render(request,'userinfo/index.html',
+                    {'error':errorMsg})
+    
     NotExists=verdict[1]
     UsersRating=verdict[2]
     answer=team_ratings(UsersRating)
@@ -458,12 +467,14 @@ def teamrate(request):
     length=len(NotExists)
 
     return render(request, 'userinfo/teamrate.html',
-                  {'error':error,
+                  {
                    'length':length,
                    'notexists':NotExists,
                    'answer':answer,
                    'rank':rank,
-                   'color':color})
+                   'color':color,
+                   'exists':Exists})
+
 
 
 def signup(request):
