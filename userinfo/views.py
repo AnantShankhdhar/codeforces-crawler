@@ -428,7 +428,11 @@ def teamrate(request):
     except:
         pass
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 47076d1cb3693eae6b501f77ab2d1ad1f69ebcd9
     if(len(users)==0):
         errorMsg="Provide atleast 1 valid input"
         return render(request,'userinfo/index.html',
@@ -439,7 +443,11 @@ def teamrate(request):
         errorMsg="Provide atleast 1 valid input"
         return render(request,'userinfo/index.html',
                     {'error':errorMsg})
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 47076d1cb3693eae6b501f77ab2d1ad1f69ebcd9
     NotExists=verdict[1]
     UsersRating=verdict[2]
     answer=team_ratings(UsersRating)
