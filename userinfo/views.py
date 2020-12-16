@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .scraping import scrape,only_rating
 from .teamrate import team_ratings
+from .rank_color import rank_color
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 import datetime
@@ -51,6 +52,9 @@ def detail(request):
         ProbRecommended = verdict[17]
         TagListAvg = verdict[18]
 
+        HeatmapList = verdict[19]
+        HeatmapListAC = verdict[20]
+
         return  render(request, 'userinfo/detail.html',
                        {'exists': exists,
                         'contests_given': contests_given,
@@ -87,6 +91,8 @@ def detail(request):
         ProbRecommended = verdict[23]
         TagListAvg = verdict[24]
         FirstTimeChange = verdict[25]
+        HeatmapList = verdict[26]
+        HeatmapListAC = verdict[27]
 
         VerdictList['Accepted'] = VerdictList['OK']
         del VerdictList['OK']
@@ -428,11 +434,6 @@ def teamrate(request):
     except:
         pass
 
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 47076d1cb3693eae6b501f77ab2d1ad1f69ebcd9
     if(len(users)==0):
         errorMsg="Provide atleast 1 valid input"
         return render(request,'userinfo/index.html',
@@ -443,48 +444,13 @@ def teamrate(request):
         errorMsg="Provide atleast 1 valid input"
         return render(request,'userinfo/index.html',
                     {'error':errorMsg})
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 47076d1cb3693eae6b501f77ab2d1ad1f69ebcd9
     NotExists=verdict[1]
     UsersRating=verdict[2]
     answer=team_ratings(UsersRating)
 
-    if answer<=1199:
-        rank='Newbie'
-        color='Grey'
-    elif answer<=1399:
-        rank='Pupil'
-        color='Green'
-    elif answer<=1599:
-        rank='Specialist'
-        color='Cyan'
-    elif answer<=1899:
-        rank='Expert'
-        color='Blue'
-    elif answer<=2099:
-        rank='Candidate Master'
-        color='Purple'
-    elif answer<=2299:
-        rank='Master'
-        color='Orange'
-    elif answer<=2399:
-        rank='International Master'
-        color='Orange'
-    elif answer<=2599:
-        rank='Grandmaster'
-        color='Red'
-    elif answer<=2999:
-        rank='International Grandmaster'
-        color='Red'
-    else:
-        rank='Legendary Grandmaster'
-        color='BRed'
-
     length=len(NotExists)
-
+    rank,color=rank_color(answer)
     return render(request, 'userinfo/teamrate.html',
                   {
                    'length':length,

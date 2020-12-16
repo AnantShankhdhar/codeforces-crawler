@@ -25,6 +25,8 @@ def scrape(username):
     import requests
     import json
     import math
+    import datetime
+    import time
     exists = True
     api_url = "https://codeforces.com/api/"
 
@@ -58,7 +60,7 @@ def scrape(username):
         try:
             organization = info_results['organization']
         except:
-            organization = "organisation not mentioned"
+            organization = "Organisation not mentioned"
         try:
             rank = info_results['rank']
         except:
@@ -81,6 +83,9 @@ def scrape(username):
         prob_list=[]
         prob_list_contest=[]
 
+        heatmap_list={}
+        heatmap_list_ac={}
+
         submissions = requests.get(api_url + "user.status?handle=" + username)
         submissions_results = submissions.json()['result']
         for result in submissions_results:
@@ -98,7 +103,22 @@ def scrape(username):
             else:
                 lang_list[language]=1
 
+            #submission time
+            sub_time=result['creationTimeSeconds']
+            sub_date= datetime.datetime.fromtimestamp(sub_time)
+            time_id=str(sub_date.day)+" "+str(sub_date.month)+" "+str(sub_date.year)
+            if time_id in heatmap_list:
+                heatmap_list[time_id]+=1
+            else:
+                heatmap_list[time_id]=1
+
             if verdict == 'OK':
+                #submission time
+                if time_id in heatmap_list_ac:
+                    heatmap_list_ac[time_id] += 1
+                else:
+                    heatmap_list_ac[time_id] = 1
+
                 #tags
                 problem = result['problem']
                 tags = problem['tags']
@@ -144,11 +164,6 @@ def scrape(username):
 
         for tags in tag_list_count:
             k=(tag_list_sum[tags])/(tag_list_count[tags])
-            # k=k/100
-            # if(k-math.floor(k)>0.5):
-            #     tag_list_avg[tags]=math.floor(k)*100+100
-            # else:
-            #     tag_list_avg[tags]=math.floor(k)*100
             tag_list_avg[tags]=int(k)
 
         sort_tag_list=tag_list_avg
@@ -174,6 +189,7 @@ def scrape(username):
                     prob_name=prob['name']
                     if (ID not in prob_list) and (abs(rating-prob_rating)<=200 or rating<=800):
                         prob_recommended.append([prob_name,contestId,index])
+                        prob_list.append(ID)
                         break
                 except:
                     pass
@@ -232,6 +248,9 @@ def scrape(username):
         else:
             contest_given=False
 
+        #heatmap
+
+
         #VC recommendation
         #contest_list has all given contests
         # prob_list_contest contains contest with atleast one solved
@@ -244,15 +263,21 @@ def scrape(username):
                 phase=all_contest_results[i]['phase']
                 contest_name = all_contest_results[i]['name']
                 if (contestId not in prob_list_contest) and (phase == "FINISHED") and (contest_name[0:10]=="Codeforces" or contest_name[0:11]=="Educational"):
+                    if (rating<=1599 and contest_name[23:29]=="Div. 1"):
+                        continue
+                    if (rating>=1900 and contest_name[23:29]=="Div. 3"):
+                        continue
                     vc_list.append([contest_name,contestId])
+                    #print(contest_name[23:29]," ",rating)
                     if len(vc_list)==5:
                         break
 
         if contest_given==False:
-            return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,vc_list,recent_list,prob_recommended,tag_list_avg
+            return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,vc_list,recent_list,prob_recommended,tag_list_avg,heatmap_list,heatmap_list_ac
 
-        print("vc_list=",vc_list)
+        #print("vc_list=",vc_list)
         # print("recent_list=",recent_list)
         # print("prob_recommended=",prob_recommended)
         # print("tag_list_avg=",tag_list_avg)
-        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change
+        print(heatmap_list_ac)
+        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change,heatmap_list,heatmap_list_ac
