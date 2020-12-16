@@ -14,43 +14,20 @@
 
 </head>
 
-<body>
-<!--  &lt;!&ndash; Navbar &ndash;&gt;-->
-
-<!--  <nav class="navbar navbar-expand-md navbar-light fixed-top py-2 p-md-0" id="main-navbar">-->
-<!--    <div class="container d-flex" style="height: 100%;">-->
-<!--      <div class="col-4">-->
-<!--        <span>Hey, {{user }}</span>-->
-<!--      </div>-->
-<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--      </button>-->
-<!--      <div class="col collapse navbar-collapse" id="navbarCollapse">-->
-<!--        <ul class="navbar-nav m-0 d-flex justify-content-around" style="width: 100%;">-->
-
-<!--          <li class="nav-item active py-md-2">-->
-<!--            <a class="nav-link" href="#">Github</a>-->
-<!--          </li>-->
-
-<!--        </ul>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </nav>-->
-<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
-<!--</body>-->
-<!--</html>-->
+<body style="background-color: #FFDEAD;">
 
 {% if exists == False %}
     No such username
 {% elif contests_given == False %}
     No contest given
 {% else %}
-<br><br>
+<br>
+<br>
 <div class="wrapper">
   <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 card">
+    <div class="col-md-4 " >
+      <div class="card usercardinfo" >
         <span class="info">
           <p class="ques" style="display:inline">User name: </p>
           <p class="ans" style="display:inline">{{ user }} </p>
@@ -87,10 +64,7 @@
           <p class="ques" style="display:inline">Maximum Rank: </p>
           <p class="ans" style="display:inline">{{ maxrank }} </p>
         </span>
-
-    </div>
-    <div class="col-md-1">
-
+      </div>
     </div>
     <div class="col-md-8 ">
       <div class="row card">
@@ -100,6 +74,7 @@
         {% endfor %}
 
       </div>
+
       <br>
       <div class="row card">
         <h2 class="recommendation">Problems Recommendation</h2>
@@ -113,36 +88,107 @@
     </div>
 
   </div>
-
+  <br>
   <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="LangList">
+            <canvas id="LangList"  class="LangListcss" width="400"></canvas>
+        </div>
+      </div>
 
+    </div>
+    <div class="col-md-6 ">
+      <div class="card">
+        <div class="TypeListcss">
+            <canvas id="TypeList"  class="TypeListcss" ></canvas>
+        </div>
+      </div>
+    </div>
   </div>
+  <br>
+  <div class="row ">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="ProbRatList">
+            <canvas id="ProbRatList"  class="ProbRatcss" width="400"></canvas>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <div class="VerdictList">
+            <canvas id="VerdictList"  class="VerdictListcss" width="400"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row ">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="RatingGraph">
+            <canvas id="RatingGraph"  class="RatingGraphcss" ></canvas>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="RankGraph">
+            <canvas id="RankGraph"  class="RankGraphcss" ></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="row ">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10 ">
+      <div class="card">
+        <div class="TagList">
+            <canvas id="TagList"  class="TagListcss" ></canvas>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+  <br>
+  <div class="row ">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10 ">
+      <div class="card">
+        <div class="TagListAvg">
+            <canvas id="TagListAvg"  class="TagListAvgcss" ></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+
+
 </div>
 </div>
-    <div class="TypeListcss">
-        <canvas id="TypeList"  class="TypeListcss" width="400"></canvas>
-    </div>
-    <div class="LangList">
-        <canvas id="LangList"  class="LangListcss" width="400"></canvas>
-    </div>
-    <div class="VerdictList">
-        <canvas id="VerdictList"  class="VerdictListcss" width="400"></canvas>
-    </div>
-    <div class="ProbRatList">
-        <canvas id="ProbRatList"  class="ProbRatcss" width="400"></canvas>
-    </div>
-    <div class="TagList">
-        <canvas id="TagList"  class="TagListcss" width="400"></canvas>
-    </div>
-    <div class="TagListAvg">
-        <canvas id="TagListAvg"  class="TagListAvgcss" width="400"></canvas>
-    </div>
-    <div class="RatingGraph">
-        <canvas id="RatingGraph"  class="RatingGraphcss" width="400"></canvas>
-    </div>
-    <div class="RankGraph">
-        <canvas id="RankGraph"  class="RankGraphcss" width="400"></canvas>
-    </div>
+
+
+
+
+
+
+
+
+
 
 
     <script>
@@ -154,8 +200,8 @@
               datasets: [{
                   label: 'Level of Questions solved',
                   data: [{% for item in TypeList_data %} '{{ item}}', {% endfor %}],
-                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                  borderColor: 'rgba(54, 162, 235, 1)',
+                  backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
+                  borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],
                   borderWidth: 1
               }]
           },
@@ -182,7 +228,8 @@
               datasets: [{
                   label: 'Types of Questions solved',
                   data: [{% for item in LangList_data %} '{{ item}}', {% endfor %}],
-                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
+                  borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],
                   borderWidth: 1
               }]
           }
@@ -199,8 +246,8 @@
               datasets: [{
                   label: 'Submissions Results',
                   data: [{% for item in VerdictList_data %} '{{ item}}', {% endfor %}],
-                  backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                  borderColor: 'rgba(54, 162, 235, 1)',
+                  backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
+                  borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],
                   borderWidth: 1
               }]
           },
@@ -257,8 +304,8 @@
                 datasets: [{
                     label: 'Tags of Questions solved',
                     data: [{% for item in TagList_data %} '{{ item}}', {% endfor %}],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
+                    borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],
                     borderWidth: 1
                 }]
             },
@@ -288,8 +335,8 @@
                 datasets: [{
                     label: 'Tags of Questions solved',
                     data: [{% for item in TagListAvg_data %} '{{ item}}', {% endfor %}],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
+                    borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],
                     borderWidth: 1
                 }]
             },

@@ -1,19 +1,44 @@
-{% if error == True %}
-    Enter atleast 1 username
-{% else %}
-    {{ answer }}
-    <br>
-    {{ rank }}
-    <br>
-    {{ color }}
-    <br>
-    {{ length }}
-    <br>
-    {% if length != 0 %}
-        (The following users doesn't exists-
-        {% for ne in notexists %}
-            {{ ne }}
-        {% endfor %}
-        .)
-    {% endif %}
-{% endif %}
+{% load static %}
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Rating</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/teamrate.css'%}" type="text/css">
+  </head>
+  <body>
+      <div class="container">
+        <div class= "Teamrating card text-center">
+            <span class="info">
+                <p class="ques" style="display:inline">Team Members: </p>
+                <p class="ans" style="display:inline">{% for e in exists %}
+                    {{ e}}
+                {% endfor %} </p>
+            </span>
+            <span class="info">
+                <p class="ques" style="display:inline">Team Rating: </p>
+                <p class="ans" style="display:inline">{{ answer }} </p>
+            </span>
+            <span class="info">
+                <p class="ques" style="display:inline">Team Rank: </p>
+                <p class="ans" style="display:inline">{{ rank }} </p>
+            </span>
+            <span class="info">
+                <p class="ques" style="display:inline">Team Color: </p>
+                <p class="ans" style="display:inline">{{ color }} </p>
+            </span>
+            {% if length != 0 %}
+                (The following  {{ length }} users don't exists-
+                {% for ne in notexists %}
+                    {{ ne}}
+                {% endfor %}
+                .)
+            {% endif %}
+        </div>
+      </div>
+  </body>
+    
+   
+    

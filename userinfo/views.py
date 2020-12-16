@@ -15,6 +15,15 @@ def index(request):
 def detail(request):
     user = request.POST['user']  # user is the name of the input
     # rank,color,ar,institute,ac,wa,tle,rte,mle,challenged,cpe,skipped,ile,other = scrape(user)
+    colorslisttemp = ['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)']
+    colorsborderlisttemp = ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)']
+    colorslist = []
+    colorsborderlist = []
+    for i in range(0,50,1):
+        colorslist.append(colorslisttemp[i%6])
+        colorsborderlist.append(colorsborderlisttemp[i%6])
+
+
     verdict = scrape(user)
     if verdict == False:
         exists = verdict
@@ -169,7 +178,9 @@ def detail(request):
                       'VerdictList_label':VerdictList_label,
                       'LangList_data':LangList_data,
                       'LangList_label':LangList_label,
-                      'FirstTimeChange':FirstTimeChange
+                      'FirstTimeChange':FirstTimeChange,
+                      'colorslist': colorslist,
+                      'colorsborderlist':colorsborderlist
                        }
                       )
 
@@ -394,32 +405,41 @@ def teamrate(request):
     users=[]
     try:
         user1 = request.POST['user1']
-        users.append(user1)
+        if user1 != '':
+            users.append(user1)
     except:
         pass
     try:
         user2 = request.POST['user2']
-        users.append(user2)
+        if user2 != '':
+            users.append(user2)
     except:
         pass
     try:
         user3 = request.POST['user3']
-        users.append(user3)
+        if user3 != '':
+            users.append(user3)
     except:
         pass
     try:
         user4 = request.POST['user4']
-        users.append(user4)
+        if user4 != '':
+            users.append(user4)
     except:
         pass
 
-    error = False
+
     if(len(users)==0):
-        error=True
-        return render(request,'userinfo/teamrate.html',
-                    {'error':error})
+        errorMsg="Provide atleast 1 valid input"
+        return render(request,'userinfo/index.html',
+                    {'error':errorMsg})
     verdict=only_rating(users)
     Exists=verdict[0]
+    if len(Exists)==0:
+        errorMsg="Provide atleast 1 valid input"
+        return render(request,'userinfo/index.html',
+                    {'error':errorMsg})
+
     NotExists=verdict[1]
     UsersRating=verdict[2]
     answer=team_ratings(UsersRating)
@@ -458,12 +478,14 @@ def teamrate(request):
     length=len(NotExists)
 
     return render(request, 'userinfo/teamrate.html',
-                  {'error':error,
+                  {
                    'length':length,
                    'notexists':NotExists,
                    'answer':answer,
                    'rank':rank,
-                   'color':color})
+                   'color':color,
+                   'exists':Exists})
+
 
 
 def signup(request):
