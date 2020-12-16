@@ -114,32 +114,29 @@ def detail(request):
 
         TagList_label = []
         TagList_data = []
-        #print(TagList)
+
         TagList = dict(sorted(TagList.items(), key=lambda item: item[1], reverse=True))
         for i in TagList:
             TagList_label.append(i)
             TagList_data.append(TagList[i])
-        #print(TagList)
+
         TagListAvg_label = []
         TagListAvg_data = []
 
-        #print(TagListAvg)
         TagListAvg = dict(sorted(TagListAvg.items(), key=lambda item: item[1], reverse=True))
         for i in TagListAvg:
             TagListAvg_label.append(i)
             TagListAvg_data.append(TagListAvg[i])
-        #print(TagListAvg)
 
         contestTimegood = []
         for i in (contestTime):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
             #i = datetime.datetime.fromtimestamp(i).strftime('%c')
             contestTimegood.append(t)
-            #print(t)
-            #print(i)
 
         return render(request, 'userinfo/detail.html',
                       {
+                      'user':user,
                       'maxrating':maxrating,
                       'country':country,
                       'city':city,
@@ -171,7 +168,8 @@ def detail(request):
                       'VerdictList_data':VerdictList_data,
                       'VerdictList_label':VerdictList_label,
                       'LangList_data':LangList_data,
-                      'LangList_label':LangList_label
+                      'LangList_label':LangList_label,
+                      'FirstTimeChange':FirstTimeChange
                        }
                       )
 
@@ -188,212 +186,208 @@ def Compares(request):
     if error == True:
         return render(request,'userinfo/compares.html',{'error':error})
 
-    Firstverdict = scrape(Firstuser)
-    Secondverdict = scrape(Seconduser)
-    if Firstverdict == False or Secondverdict==False:
-        Firstexists = Firstverdict
-        Secondexists = Secondverdict
-        return render(request, 'userinfo/compares.html',
-                    {
-                    'Secondexists': Secondexists,
-                    'Firstexists': Firstexists
-                    })
+    Fverdict=scrape(Firstuser)
+    Sverdict=scrape(Seconduser)
 
-    else:
-        # First User Verdict
-        Firstexists = Firstverdict[0]
-        Firstcontests_given = Firstverdict[1]
-        Firstname = Firstverdict[2]
-        Firstrating = Firstverdict[3]
-        Firstmaxrating = Firstverdict[4]
-        Firstcountry = Firstverdict[5]
-        Firstcity = Firstverdict[6]
-        Firstorganisation = Firstverdict[7]
-        Firstrank = Firstverdict[8]
-        Firstmaxrank = Firstverdict[9]
+    Fexists = Fverdict[0]
+    Fcontests_given = Fverdict[1]
+    Fname = Fverdict[2]
+    Frating = Fverdict[3]
+    Fmaxrating = Fverdict[4]
+    Fcountry = Fverdict[5]
+    Fcity = Fverdict[6]
+    Forganisation = Fverdict[7]
+    Frank = Fverdict[8]
+    Fmaxrank = Fverdict[9]
 
-        FirstTagList = Firstverdict[10]
-        FirstProbRatList = Firstverdict[11]
-        FirstTypeList = Firstverdict[12]
-        FirstLangList = Firstverdict[13]
-        FirstVerdictList = Firstverdict[14]
+    FTagList = Fverdict[10]
+    FProbRatList = Fverdict[11]
+    FTypeList = Fverdict[12]
+    FLangList = Fverdict[13]
+    FVerdictList = Fverdict[14]
 
-        FirstcontestTime = Firstverdict[15]
-        Firstranks = Firstverdict[16]
-        FirstoldRatings = Firstverdict[17]
-        FirstnewRatings = Firstverdict[18]
-        FirstbestRank = Firstverdict[19]
-        FirstworstRank = Firstverdict[20]
+    FcontestTime = Fverdict[15]
+    Franks = Fverdict[16]
+    FoldRatings = Fverdict[17]
+    FnewRatings = Fverdict[18]
+    FbestRank = Fverdict[19]
+    FworstRank = Fverdict[20]
 
-        # Second User Verdict
+    FVCList = Fverdict[21]
+    FRecentList = Fverdict[22]
+    FProbRecommended = Fverdict[23]
+    FTagListAvg = Fverdict[24]
+    FFirstTimeChange = Fverdict[25]
 
-        Secondexists = Secondverdict[0]
-        Secondcontests_given = Secondverdict[1]
-        Secondname = Secondverdict[2]
-        Secondrating = Secondverdict[3]
-        Secondmaxrating = Secondverdict[4]
-        Secondcountry = Secondverdict[5]
-        Secondcity = Secondverdict[6]
-        Secondorganisation = Secondverdict[7]
-        Secondrank = Secondverdict[8]
-        Secondmaxrank = Secondverdict[9]
+    Sexists = Sverdict[0]
+    Scontests_given = Sverdict[1]
+    Sname = Sverdict[2]
+    Srating = Sverdict[3]
+    Smaxrating = Sverdict[4]
+    Scountry = Sverdict[5]
+    Scity = Sverdict[6]
+    Sorganisation = Sverdict[7]
+    Srank = Sverdict[8]
+    Smaxrank = Sverdict[9]
 
-        SecondTagList = Secondverdict[10]
-        SecondProbRatList = Secondverdict[11]
-        SecondTypeList = Secondverdict[12]
-        SecondLangList = Secondverdict[13]
-        SecondVerdictList = Secondverdict[14]
+    STagList = Sverdict[10]
+    SProbRatList = Sverdict[11]
+    STypeList = Sverdict[12]
+    SLangList = Sverdict[13]
+    SVerdictList = Sverdict[14]
 
-        SecondcontestTime = Secondverdict[15]
-        Secondranks = Secondverdict[16]
-        SecondoldRatings = Secondverdict[17]
-        SecondnewRatings = Secondverdict[18]
-        SecondbestRank = Secondverdict[19]
-        SecondworstRank = Secondverdict[20]
+    ScontestTime = Sverdict[15]
+    Sranks = Sverdict[16]
+    SoldRatings = Sverdict[17]
+    SnewRatings = Sverdict[18]
+    SbestRank = Sverdict[19]
+    SworstRank = Sverdict[20]
 
-        #First User verdicts changes
+    SVCList = Sverdict[21]
+    SRecentList = Sverdict[22]
+    SProbRecommended = Sverdict[23]
+    STagListAvg = Sverdict[24]
+    SFirstTimeChange = Sverdict[25]
 
-        Firstac=FirstVerdictList['OK']
+    SVerdictList['Accepted'] = SVerdictList['OK']
+    del SVerdictList['OK']
 
-        FirstVerdictList['Accepted'] = FirstVerdictList['OK']
-        del FirstVerdictList['OK']
-
-
-        FirstTypeList_label = []
-        FirstTypeList_data = []
-
-        for i in sorted (FirstTypeList) :
-            FirstTypeList_data.append(FirstTypeList[i])
-            FirstTypeList_label.append(i)
-
-        FirstLangList_label = []
-        FirstLangList_data = []
-
-        for i in sorted (FirstLangList) :
-            FirstLangList_data.append(FirstLangList[i])
-            FirstLangList_label.append(i)
-
-        FirstProbRatList_label = []
-        FirstProbRatList_data = []
-
-        for i in sorted (FirstProbRatList) :
-            FirstProbRatList_data.append(FirstProbRatList[i])
-            FirstProbRatList_label.append(i)
-
-        FirstVerdictList_label = []
-        FirstVerdictList_data = []
-
-        FirstVerdictList = dict([(value, key) for key, value in FirstVerdictList.items()])
-        for i in sorted (FirstVerdictList, reverse= True) :
-            FirstVerdictList_label.append(FirstVerdictList[i])
-            FirstVerdictList_data.append(i)
-
-        FirstTagList_label = []
-        FirstTagList_data = []
-
-        FirstTagList = dict([(value, key) for key, value in FirstTagList.items()])
-        for i in sorted (FirstTagList, reverse=True) :
-            FirstTagList_label.append(FirstTagList[i])
-            FirstTagList_data.append(i)
-
-        FirstcontestTimegood = []
-        for i in (FirstcontestTime):
-            t = time.strftime('%Y-%m-%d', time.localtime(i))
-            FirstcontestTimegood.append(t)
-
-        #Second User verdicts changes
-
-        Secondac=SecondVerdictList['OK']
-
-        SecondVerdictList['Accepted'] = SecondVerdictList['OK']
-        del SecondVerdictList['OK']
+    #Combine
+    CTypeList_label = []
+    FTypeList_data = []
+    STypeList_data = []
+    for i in sorted(FTypeList):
+        CTypeList_label.append(i)
+    for i in sorted(STypeList):
+        if i not in CTypeList_label:
+            CTypeList_label.append(i)
+    for i in CTypeList_label:
+        if i in FTypeList:
+            FTypeList_data.append(FTypeList[i])
+        else:
+            FTypeList_data.append(0)
+        if i in STypeList:
+            STypeList_data.append(STypeList[i])
+        else:
+            STypeList_data.append(0)
+    # print(CTypeList_label)
+    # print(FTypeList_data)
+    # print(STypeList_data)
 
 
-        SecondTypeList_label = []
-        SecondTypeList_data = []
+    #Not combine
+    FLangList_label = []
+    FLangList_data = []
+    for i in sorted(FLangList):
+        FLangList_data.append(FLangList[i])
+        FLangList_label.append(i)
+    SLangList_label = []
+    SLangList_data = []
+    for i in sorted(SLangList):
+        SLangList_data.append(SLangList[i])
+        SLangList_label.append(i)
 
-        for i in sorted (SecondTypeList) :
-            SecondTypeList_data.append(SecondTypeList[i])
-            SecondTypeList_label.append(i)
+    #Combine
+    CProbRatList_label = []
+    FProbRatList_data = []
+    SProbRatList_data = []
+    for i in sorted(FProbRatList):
+        CProbRatList_label.append(i)
+    for i in sorted(SProbRatList):
+        if i not in CProbRatList_label:
+            CProbRatList_label.append(i)
+    for i in CProbRatList_label:
+        if i in FProbRatList:
+            FProbRatList_data.append(FProbRatList[i])
+        else:
+            FProbRatList_data.append(0)
+        if i in SProbRatList:
+            SProbRatList_data.append(SProbRatList[i])
+        else:
+            SProbRatList_data.append(0)
 
-        SecondLangList_label = []
-        SecondLangList_data = []
+    #Combine
+    CVerdictList_label = []
+    FVerdictList_data = []
+    SVerdictList_data = []
+    FVerdictList = dict(sorted(FVerdictList.items(), key=lambda item: item[1], reverse=True))
+    SVerdictList = dict(sorted(SVerdictList.items(), key=lambda item: item[1], reverse=True))
+    for i in FVerdictList:
+        CVerdictList_label.append(i)
+    for i in sorted(SVerdictList):
+        if i not in CVerdictList_label:
+            CVerdictList_label.append(i)
+    for i in CVerdictList_label:
+        if i in FVerdictList:
+            FVerdictList_data.append(FVerdictList[i])
+        else:
+            FVerdictList_data.append(0)
+        if i in SVerdictList:
+            SVerdictList_data.append(SVerdictList[i])
+        else:
+            SVerdictList_data.append(0)
 
-        for i in sorted (SecondLangList) :
-            SecondLangList_data.append(SecondLangList[i])
-            SecondLangList_label.append(i)
 
-        SecondProbRatList_label = []
-        SecondProbRatList_data = []
+    #Combine
+    CTagList_label = []
+    FTagList_data = []
+    STagList_data = []
+    FTagList = dict(sorted(FTagList.items(), key=lambda item: item[1], reverse=True))
+    STagList = dict(sorted(STagList.items(), key=lambda item: item[1], reverse=True))
+    for i in FTagList:
+        CTagList_label.append(i)
+    for i in sorted(STagList):
+        if i not in CTagList_label:
+            CTagList_label.append(i)
+    for i in CTagList_label:
+        if i in FTagList:
+            FTagList_data.append(FTagList[i])
+        else:
+            FTagList_data.append(0)
+        if i in STagList:
+            STagList_data.append(STagList[i])
+        else:
+            STagList_data.append(0)
 
-        for i in sorted (SecondProbRatList) :
-            SecondProbRatList_data.append(SecondProbRatList[i])
-            SecondProbRatList_label.append(i)
 
-        SecondVerdictList_label = []
-        SecondVerdictList_data = []
+    #Combine
+    CTagListAvg_label = []
+    FTagListAvg_data = []
+    STagListAvg_data = []
+    FTagListAvg = dict(sorted(FTagListAvg.items(), key=lambda item: item[1], reverse=True))
+    STagListAvg = dict(sorted(STagListAvg.items(), key=lambda item: item[1], reverse=True))
+    for i in FTagListAvg:
+        CTagListAvg_label.append(i)
+    for i in sorted(STagListAvg):
+        if i not in CTagListAvg_label:
+            CTagListAvg_label.append(i)
+    for i in CTagListAvg_label:
+        if i in FTagListAvg:
+            FTagListAvg_data.append(FTagListAvg[i])
+        else:
+            FTagListAvg_data.append(0)
+        if i in STagListAvg:
+            STagListAvg_data.append(STagListAvg[i])
+        else:
+            STagListAvg_data.append(0)
 
-        SecondVerdictList = dict([(value, key) for key, value in SecondVerdictList.items()])
-        for i in sorted (SecondVerdictList, reverse= True) :
-            SecondVerdictList_label.append(SecondVerdictList[i])
-            SecondVerdictList_data.append(i)
 
-        SecondTagList_label = []
-        SecondTagList_data = []
+    FcontestTimegood = []
+    ScontestTimegood = []
+    for i in (FcontestTime):
+        t = time.strftime('%Y-%m-%d', time.localtime(i))
+        # i = datetime.datetime.fromtimestamp(i).strftime('%c')
+        FcontestTimegood.append(t)
+    for i in (ScontestTime):
+        t = time.strftime('%Y-%m-%d', time.localtime(i))
+        # i = datetime.datetime.fromtimestamp(i).strftime('%c')
+        ScontestTimegood.append(t)
 
-        SecondTagList = dict([(value, key) for key, value in SecondTagList.items()])
-        for i in sorted (SecondTagList, reverse=True) :
-            SecondTagList_label.append(SecondTagList[i])
-            SecondTagList_data.append(i)
+    return render(request, 'userinfo/detail.html',
+                  {
 
-        SecondcontestTimegood = []
-        for i in (SecondcontestTime):
-            t = time.strftime('%Y-%m-%d', time.localtime(i))
-            SecondcontestTimegood.append(t)
-
-        #returning both user verdicts
-        return render(request, 'userinfo/compares.html',
-                      {
-                      'Secondexists': Secondexists,
-                      'Secondcontests_given': Secondcontests_given,
-                      'Secondname': Secondname,
-                      'Secondrating': Secondrating,
-                      'SecondcontestTime':SecondcontestTime,
-                      'SecondcontestTimegood':SecondcontestTimegood,
-                      'Secondranks':Secondranks,
-                      'SecondnewRatings':SecondnewRatings,
-                      'SecondbestRank': SecondbestRank,
-                      'SecondTagList_data':SecondTagList_data,
-                      'SecondTagList_label':SecondTagList_label,
-                      'SecondProbRatList_data':SecondProbRatList_data,
-                      'SecondProbRatList_label':SecondProbRatList_label,
-                      'SecondTypeList_data':SecondTypeList_data,
-                      'SecondTypeList_label':SecondTypeList_label,
-                      'SecondVerdictList_data':SecondVerdictList_data,
-                      'VerdictList_label':SecondVerdictList_label,
-                      'SecondLangList_data':SecondLangList_data,
-                      'SecondLangList_label':SecondLangList_label,
-                      'Firstexists': Firstexists,
-                      'Firstcontests_given': Firstcontests_given,
-                      'Firstname': Firstname,
-                      'Firstrating': Firstrating,
-                      'FirstcontestTime':FirstcontestTime,
-                      'FirstcontestTimegood':FirstcontestTimegood,
-                      'Firstranks':Firstranks,
-                      'FirstnewRatings':FirstnewRatings,
-                      'FirstbestRank': FirstbestRank,
-                      'FirstTagList_data':FirstTagList_data,
-                      'FirstTagList_label':FirstTagList_label,
-                      'FirstProbRatList_data':FirstProbRatList_data,
-                      'FirstProbRatList_label':FirstProbRatList_label,
-                      'FirstTypeList_data':FirstTypeList_data,
-                      'FirstTypeList_label':FirstTypeList_label,
-                      'FirstVerdictList_data':FirstVerdictList_data,
-                      'FirstVerdictList_label':FirstVerdictList_label,
-                      'FirstLangList_data':FirstLangList_data,
-                      'FirstLangList_label':FirstLangList_label
-                       }
-                      )
+                  }
+                  )
 
 
 def teamrate(request):
