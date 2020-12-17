@@ -187,7 +187,7 @@ def scrape(username):
                 try:
                     prob_rating=prob['rating']
                     prob_name=prob['name']
-                    if (ID not in prob_list) and (abs(rating-prob_rating)<=200 or rating<=800):
+                    if (ID not in prob_list) and (abs(rating-prob_rating)<=200 or (rating<=800 and prob_rating<=1000) or (rating>=3500 and prob_rating>=3300)):
                         prob_recommended.append([prob_name,contestId,index])
                         prob_list.append(ID)
                         break
@@ -249,7 +249,16 @@ def scrape(username):
             contest_given=False
 
         #heatmap
-
+        heatMapListac = []
+        for k, v in heatmap_list_ac.items():
+            x = k.split()
+            sub = [int(x[0]), int(x[1]), int(x[2]), v]
+            heatMapListac.append(sub)
+        heatMapList = []
+        for k, v in heatmap_list.items():
+            x = k.split()
+            sub = [int(x[0]), int(x[1]), int(x[2]), v]
+            heatMapList.append(sub)
 
         #VC recommendation
         #contest_list has all given contests
@@ -279,14 +288,5 @@ def scrape(username):
         # print("recent_list=",recent_list)
         # print("prob_recommended=",prob_recommended)
         # print("tag_list_avg=",tag_list_avg)
-        heatMapListac = []
-        for k,v in heatmap_list_ac.items():
-            x = k.split()
-            sub = [int(x[0]),int(x[1]),int(x[2]),v]
-            heatMapListac.append(sub)
-        heatMapList = []
-        for k,v in heatmap_list.items():
-            x = k.split()
-            sub = [int(x[0]),int(x[1]),int(x[2]),v]
-            heatMapList.append(sub)
+
         return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change,heatMapList,heatMapListac
