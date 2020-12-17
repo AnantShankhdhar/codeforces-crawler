@@ -38,13 +38,13 @@
                   User handle First:
           </label>
           <br>
-          <input type="text" id="Firsthandle" name="Firstuser"/>
+          <input type="text" id="Firsthandle" required name="Firstuser"/>
           <br>
           <label for="Secondhandle">
                   User handle Second:
           </label>
           <br>
-          <input type="text" id="Secondhandle" name="Seconduser"/>
+          <input type="text" id="Secondhandle" required name="Seconduser"/>
           <br>
           <input type="submit" value="Submit">
       </form>
@@ -57,25 +57,32 @@
           <label for="handle1">
                   User handle1:
           </label><br>
-          <input type="text" id="handle1" name="user1" /><br>
+          <input type="text" id="handle1" required name="user1" /><br>
           <label for="handle2">
                   User handle2:
           </label><br>
-          <input type="text" id="handle2" name="user2" /><br>
+          <input type="text" id="handle2" required name="user2" /><br>
           <label for="handle3">
                   User handle3:
           </label><br>
-          <input type="text" id="handle3" name="user3" /><br>
+          <input type="text" id="handle3" required name="user3" /><br>
           <label for="handle4">
                   User handle4:
           </label><br>
-          <input type="text" id="handle4" name="user4" /><br>
+          <input type="text" id="handle4" required name="user4" /><br>
           <input type="submit" value="Submit">
           <p>{{error}}</p>
       </form>
     </div>
   </div>
   <br>
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
   <br>
   <br>
     <div class="row card ">
