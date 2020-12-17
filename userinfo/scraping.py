@@ -106,7 +106,7 @@ def scrape(username):
             #submission time
             sub_time=result['creationTimeSeconds']
             sub_date= datetime.datetime.fromtimestamp(sub_time)
-            time_id=str(sub_date.day)+" "+str(sub_date.month)+" "+str(sub_date.year)
+            time_id=str(sub_date.year)+" "+str(sub_date.month)+" "+str(sub_date.day)
             if time_id in heatmap_list:
                 heatmap_list[time_id]+=1
             else:
@@ -273,11 +273,20 @@ def scrape(username):
                         break
 
         if contest_given==False:
-            return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,vc_list,recent_list,prob_recommended,tag_list_avg,heatmap_list,heatmap_list_ac
+            return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,vc_list,recent_list,prob_recommended,tag_list_avg,heatMapList,heatMapListac
 
         #print("vc_list=",vc_list)
         # print("recent_list=",recent_list)
         # print("prob_recommended=",prob_recommended)
         # print("tag_list_avg=",tag_list_avg)
-        print(heatmap_list_ac)
-        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change,heatmap_list,heatmap_list_ac
+        heatMapListac = []
+        for k,v in heatmap_list_ac.items():
+            x = k.split()
+            sub = [int(x[0]),int(x[1]),int(x[2]),v]
+            heatMapListac.append(sub)
+        heatMapList = []
+        for k,v in heatmap_list.items():
+            x = k.split()
+            sub = [int(x[0]),int(x[1]),int(x[2]),v]
+            heatMapList.append(sub)
+        return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change,heatMapList,heatMapListac

@@ -139,7 +139,9 @@ def detail(request):
                        'LangList_data':LangList_data,
                        'LangList_label':LangList_label,
                        'colorslist': colorslist,
-                       'colorsborderlist':colorsborderlist
+                       'colorsborderlist':colorsborderlist,
+                       'HeatmapList':HeatmapList,
+                       'HeatmapListAC':HeatmapListAC
                         }
                        )
     else:
@@ -267,7 +269,9 @@ def detail(request):
                       'LangList_label':LangList_label,
                       'FirstTimeChange':FirstTimeChange,
                       'colorslist': colorslist,
-                      'colorsborderlist':colorsborderlist
+                      'colorsborderlist':colorsborderlist,
+                      'HeatmapList':HeatmapList,
+                      'HeatmapListAC':HeatmapListAC
                        }
                       )
 

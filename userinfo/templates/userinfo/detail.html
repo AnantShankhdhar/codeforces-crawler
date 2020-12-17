@@ -6,7 +6,55 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
       <title>Welcome, {{ user }}</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["calendar"]});
+          google.charts.setOnLoadCallback(drawChart);
+    
+          function drawChart() {
+          var dataTable1 = new google.visualization.DataTable();
+          dataTable1.addColumn({ type: 'date', id: 'Date' });
+          dataTable1.addColumn({ type: 'number', id: 'Won/Loss' });
+          var row_temp1 = {{ HeatmapListAC|safe }}
+          var dataTable2 = new google.visualization.DataTable();
+          dataTable2.addColumn({ type: 'date', id: 'Date' });
+          dataTable2.addColumn({ type: 'number', id: 'Won/Loss' });
+          var row_temp2 = {{ HeatmapList|safe }}
 
+          var rows1 = [];
+          for(var i=0;i<row_temp1.length;i++){
+            rows1[i] = [new Date(row_temp1[i][0],row_temp1[i][1]-1,row_temp1[i][2]),row_temp1[i][3]];
+          }
+          var rows2 = [];
+          for(var i=0;i<row_temp2.length;i++){
+            rows2[i] = [new Date(row_temp2[i][0],row_temp2[i][1]-1,row_temp2[i][2]),row_temp2[i][3]];
+          }
+        
+          dataTable1.addRows(rows1);
+           
+    
+           var chart1 = new google.visualization.Calendar(document.getElementById('ACheatmap'));
+    
+           var options1 = {
+             title: "Accepted heatmap",
+             height: 350,
+           };
+           
+          dataTable2.addRows(rows2);
+           
+    
+           var chart2 = new google.visualization.Calendar(document.getElementById('Subheatmap'));
+    
+           var options2 = {
+             title: "Submission heatmap",
+             height: 350,
+           };
+    
+           chart1.draw(dataTable1, options1);
+           chart2.draw(dataTable2, options2);
+       }
+       
+        </script>
 </head>
 
 <body style="background-color: #FFDEAD;">
@@ -166,6 +214,32 @@
         <div class="TagListAvg">
             <canvas id="TagListAvg"  class="TagListAvgcss" ></canvas>
         </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10 ">
+      <div class="card">
+        <div id="Subheatmap" style="width: 1000px; height: 350px;"></div>
+      </div>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10 ">
+      <div class="card">
+        <div id="ACheatmap" style="width: 1000px; height: 350px;"></div>
       </div>
     </div>
     <div class="col-md-1">
