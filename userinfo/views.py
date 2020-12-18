@@ -66,6 +66,7 @@ def detail(request):
         FirstTimeChange = verdict[25]
         HeatmapList = verdict[26]
         HeatmapListAC = verdict[27]
+        FirstTimeChangeExits=False
 
         VerdictList['ACCEPTED'] = VerdictList['OK']
         del VerdictList['OK']
@@ -147,6 +148,7 @@ def detail(request):
                        'LangList_label':LangList_label,
                        'colorslist': colorslist,
                        'colorsborderlist':colorsborderlist,
+                       'FirstTimeChangeExits':FirstTimeChangeExits,
                        'HeatmapList':HeatmapList,
                        'HeatmapListAC':HeatmapListAC
                         }
@@ -183,6 +185,13 @@ def detail(request):
         FirstTimeChange = verdict[25]
         HeatmapList = verdict[26]
         HeatmapListAC = verdict[27]
+        FirstTimeChangeExits=True
+
+        rank, passrankcolor = rank_color(rating)
+        maxrank, passmaxrankcolor = rank_color(rating)
+
+        userfirstletter = user[0]
+        userremaining = user[1:]
 
         VerdictList['ACCEPTED'] = VerdictList['OK']
         del VerdictList['OK']
@@ -277,7 +286,11 @@ def detail(request):
                       'FirstTimeChange':FirstTimeChange,
                       'colorslist': colorslist,
                       'colorsborderlist':colorsborderlist,
+                      'FirstTimeChangeExits':FirstTimeChangeExits,
                       'HeatmapList':HeatmapList,
+                      'passrankcolor':passrankcolor,
+                      'userfirstletter':userfirstletter,
+                      'userremaining':userremaining,
                       'HeatmapListAC':HeatmapListAC
                        }
                       )

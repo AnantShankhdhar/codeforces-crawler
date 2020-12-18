@@ -104,7 +104,18 @@
       <div class="card usercardinfo" >
         <span class="info">
           <p class="ques" style="display:inline">User name: </p>
-          <p class="ans" style="display:inline">{{ user }} </p>
+          {% if contests_given == True %}
+            {% if rating >= 3000 %}
+              {% spaceless %}
+              <p class="ans" style="display:inline; color: black;" >{{ userfirstletter }} </p>
+              <p class="ans" style="display:inline; color: red;" >{{ userremaining }} </p>
+              {% endspaceless %}
+            {% else %}
+            <p class="ans" style="display:inline; color: {{passrankcolor}};">{{ user }} </p>
+            {% endif %}
+          {% else %}
+            <p class="ans" style="display:inline">{{ user }} </p>
+          {% endif %}
         </span>
         <span class="info">
           <p class="ques" style="display:inline">Name: </p>
@@ -132,7 +143,7 @@
         </span>
         <span class="info">
           <p class="ques" style="display:inline">Rank: </p>
-          <p class="ans" style="display:inline">{{ rank }} </p>
+          <p class="ans" style="display:inline;" >{{ rank }} </p>
         </span>
         <span class="info">
           <p class="ques" style="display:inline">Maximum Rank: </p>
@@ -140,8 +151,10 @@
         </span>
       </div>
     </div>
+    <br>
     <div class="col-md-8 ">
       <div class="row card">
+
         <h2 class="recommendation">Virtual Contest Recommendations</h2>
         {% for key,value in VCList %}
           <a href="https://codeforces.com/contestRegistration/{{value}}/virtual/true" style="display:inline">{{ key }}</a>
@@ -149,8 +162,11 @@
 
       </div>
 
+
       <br>
-      <div class="row card">
+      <div class="row ">
+        <div class="card">
+
         <h2 class="recommendation">Problems Recommendation</h2>
 
           <p style="display:inline">
@@ -159,6 +175,8 @@
             {% endfor %}
           </p>
       </div>
+
+    </div>
     </div>
 
   </div>
@@ -220,7 +238,30 @@
   </div>
   <br>
   {% endif %}
+  {% if FirstTimeChangeExits == True %}
+  <div class="row">
+    <div class="col-md-2">
 
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <h2 class="recommendation">Rating Changes in Contests</h2>
+        <span class="info" style="display:inline">
+        {% for k in FirstTimeChange %}
+
+          <p class="ques" style="display:inline">{{ k}}, </p>
+
+        {% endfor %}
+        </span>
+      </div>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+  </div>
+  <br>
+  {% endif %}
   <div class="row ">
     <div class="col-md-1">
 
@@ -439,7 +480,7 @@
             data: {
                 labels: [{% for item in TagListAvg_label %} '{{ item}}', {% endfor %}],
                 datasets: [{
-                    label: 'Tags of Questions solved',
+                    label: 'Average Rating of Tags of Questions solved',
                     data: [{% for item in TagListAvg_data %} '{{ item}}', {% endfor %}],
                     backgroundColor: [{% for i in colorslist %} '{{i}}', {% endfor %}],
                     borderColor: [{% for i in colorsborderlist %} '{{i}}', {% endfor %}],

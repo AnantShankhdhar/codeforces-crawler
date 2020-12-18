@@ -18,7 +18,6 @@
   cursor: pointer;
 }
 .wrapper{
-    width: 100rem;
     margin: 0 auto;
 }
 .card:hover{
@@ -62,3 +61,8 @@
   width: 1000px;
   height: 350px;
 }
+
+canvas{
+        width: 100% !important;
+        height: auto !important;
+    }
