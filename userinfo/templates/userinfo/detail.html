@@ -2,6 +2,8 @@
 <html>
 
 <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="{% static 'css/detail.css'%}" type="text/css">
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
       <title>Welcome, {{ user }}</title>
@@ -10,7 +12,7 @@
         <script type="text/javascript">
           google.charts.load("current", {packages:["calendar"]});
           google.charts.setOnLoadCallback(drawChart);
-    
+
           function drawChart() {
           var dataTable1 = new google.visualization.DataTable();
           dataTable1.addColumn({ type: 'date', id: 'Date' });
@@ -29,40 +31,71 @@
           for(var i=0;i<row_temp2.length;i++){
             rows2[i] = [new Date(row_temp2[i][0],row_temp2[i][1]-1,row_temp2[i][2]),row_temp2[i][3]];
           }
-        
+
           dataTable1.addRows(rows1);
-           
-    
+
+
            var chart1 = new google.visualization.Calendar(document.getElementById('ACheatmap'));
-    
+
            var options1 = {
              title: "Accepted heatmap",
              height: 350,
            };
-           
+
           dataTable2.addRows(rows2);
-           
-    
+
+
            var chart2 = new google.visualization.Calendar(document.getElementById('Subheatmap'));
-    
+
            var options2 = {
              title: "Submission heatmap",
              height: 350,
            };
-    
+
            chart1.draw(dataTable1, options1);
            chart2.draw(dataTable2, options2);
        }
-       
+
         </script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 </head>
 
 <body style="background-color: #FFDEAD;">
 
+  <div class="card-custom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <a class="navbar-brand" href="{% url 'userinfo:index' %}" style="font-weight: 700; font-family: 'GT Walsheim Pro';">CodeForces Crawler</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-angle-double-down"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-family: 'GT Walsheim Pro'; margin-right:3rem;">
+              Contributors
+            </a>
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+
 {% if exists == False %}
     No such username
 {% else %}
-<br>
 <br>
 <div class="wrapper">
   <div class="container-fluid">
@@ -220,32 +253,35 @@
 
     </div>
   </div>
+  <br>
   <div class="row ">
-    <div class="col-md-1">
+    <div class="col-md-2">
 
     </div>
-    <div class="col-md-10 ">
+    <div class="col-md-8 ">
       <div class="card">
-        <div id="Subheatmap" style="width: 1000px; height: 350px;"></div>
+        <div id="Subheatmap" class="Subheatmap"></div>
       </div>
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
 
     </div>
   </div>
+  <br>
   <div class="row ">
-    <div class="col-md-1">
+    <div class="col-md-2">
 
     </div>
-    <div class="col-md-10 ">
+    <div class="col-md-8 ">
       <div class="card">
-        <div id="ACheatmap" style="width: 1000px; height: 350px;"></div>
+        <div id="ACheatmap" class="ACheatmap"></div>
       </div>
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
 
     </div>
   </div>
+  <br>
 
 
 </div>
@@ -494,6 +530,18 @@
 
             });
     </script>
+    <script>
+        $(document).on('click','.navbar-collapse.in',function(e) {
+          if( $(e.target).is('a:not(".dropdown-toggle")') ) {
+              $(this).collapse('hide');
+          }
+        });
+      </script>
+
+    <!-- Optional Javascript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </body>
 </html>

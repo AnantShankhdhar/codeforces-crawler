@@ -8,9 +8,9 @@
     font-style: normal;
   }
   body{
-    background-color: #eaeae1;
+    background-color: #FFDEAD;
   }
-  
+
   .card{
     margin-top: 50px;
     border-radius: 4px;
@@ -27,7 +27,7 @@
   .card:hover{
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   }
-  
+
   .ques{
     font-family: GT Walsheim Pro;
     font-style: normal;
@@ -38,7 +38,7 @@
     text-transform: uppercase;
     color: #B6B6B6
   }
-  
+
   .ans{
     font-family: GT Walsheim Pro;
     font-style: normal;
@@ -47,6 +47,3 @@
     line-height: 2rem;
     color: #212121;
   }
-  
-  
-  
