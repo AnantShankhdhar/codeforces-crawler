@@ -406,6 +406,7 @@ def Compares(request):
         for i in sorted(STypeList):
             if i not in CTypeList_label:
                 CTypeList_label.append(i)
+        CTypeList_label.sort()
         for i in CTypeList_label:
             if i in FTypeList:
                 FTypeList_data.append(FTypeList[i])
@@ -441,6 +442,7 @@ def Compares(request):
         for i in sorted(SProbRatList):
             if i not in CProbRatList_label:
                 CProbRatList_label.append(i)
+        CProbRatList_label.sort()
         for i in CProbRatList_label:
             if i in FProbRatList:
                 FProbRatList_data.append(FProbRatList[i])

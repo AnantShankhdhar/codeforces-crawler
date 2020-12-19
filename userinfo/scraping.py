@@ -243,7 +243,7 @@ def scrape(username):
                     if (result['newRating']>=cutoffs[i]) and (result['newRating']<cutoffs[i+1]) and (flag[i]==0):
                         flag[i]=1
                         first_time_change.append("Became "+became[i]+" in contest "+str(it))
-                        print("Became ",became[i]," in contest ",it)
+                        # print("Became ",became[i]," in contest ",it)
 
         else:
             contest_given=False
@@ -277,16 +277,10 @@ def scrape(username):
                     if (rating>=1900 and contest_name[23:29]=="Div. 3"):
                         continue
                     vc_list.append([contest_name,contestId])
-                    #print(contest_name[23:29]," ",rating)
                     if len(vc_list)==5:
                         break
 
         if contest_given==False:
             return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,[],[],[],[],0,0,vc_list,recent_list,prob_recommended,tag_list_avg,[],heatMapList,heatMapListac
-
-        #print("vc_list=",vc_list)
-        # print("recent_list=",recent_list)
-        # print("prob_recommended=",prob_recommended)
-        # print("tag_list_avg=",tag_list_avg)
 
         return exists,contest_given,name,rating,maxrating,country,city,organization,rank,maxrank,tag_list,prob_rat,type_list,lang_list,verdict_list,contest_time,ranks,oldratings,newratings,bestRank,worstRank,vc_list,recent_list,prob_recommended,tag_list_avg,first_time_change,heatMapList,heatMapListac
