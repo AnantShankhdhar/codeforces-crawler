@@ -38,4 +38,23 @@ body{
 .card p{
   color:red;
   font-size: 12px;
+  font-family: GT Walsheim Pro;
+}
+.toptext{
+  font-family: GT Walsheim Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #212121;
+}
+
+input[type=submit] {
+  background-color:#002e4d;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
 }
