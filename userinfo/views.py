@@ -68,6 +68,8 @@ def detail(request):
         HeatmapListAC = verdict[27]
         FirstTimeChangeExits=False
 
+        height = (HeatmapListAC[0][0]-HeatmapListAC[len(HeatmapListAC)-1][0]+1)*175
+
         VerdictList['ACCEPTED'] = VerdictList['OK']
         del VerdictList['OK']
 
@@ -150,7 +152,8 @@ def detail(request):
                        'colorsborderlist':colorsborderlist,
                        'FirstTimeChangeExits':FirstTimeChangeExits,
                        'HeatmapList':HeatmapList,
-                       'HeatmapListAC':HeatmapListAC
+                       'HeatmapListAC':HeatmapListAC,
+                       'height':height
                         }
                        )
     else:
@@ -247,7 +250,7 @@ def detail(request):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
             #i = datetime.datetime.fromtimestamp(i).strftime('%c')
             contestTimegood.append(t)
-
+        height = (HeatmapListAC[0][0]-HeatmapListAC[len(HeatmapListAC)-1][0]+1)*175
         return render(request, 'userinfo/detail.html',
                       {
                       'user':user,
@@ -291,7 +294,8 @@ def detail(request):
                       'passrankcolor':passrankcolor,
                       'userfirstletter':userfirstletter,
                       'userremaining':userremaining,
-                      'HeatmapListAC':HeatmapListAC
+                      'HeatmapListAC':HeatmapListAC,
+                      'height':height
                        }
                       )
 
