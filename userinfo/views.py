@@ -191,7 +191,6 @@ def detail(request):
         FirstTimeChangeExits=True
 
         rank, passrankcolor = rank_color(rating)
-        maxrank, passmaxrankcolor = rank_color(rating)
 
         userfirstletter = user[0]
         userremaining = user[1:]
@@ -397,6 +396,17 @@ def Compares(request):
         FVerdictList['ACCEPTED'] = FVerdictList['OK']
         del FVerdictList['OK']
 
+        Frank, Fpassrankcolor = rank_color(Frating)
+
+        Fuserfirstletter = Firstuser[0]
+        Fuserremaining = Firstuser[1:]
+
+        Srank, Spassrankcolor = rank_color(Srating)
+
+        Suserfirstletter = Seconduser[0]
+        Suserremaining = Seconduser[1:]
+
+
         #Combine
         CTypeList_label = []
         FTypeList_data = []
@@ -532,6 +542,12 @@ def Compares(request):
 
         return render(request, 'userinfo/compares.html',
                       {
+                      'Spassrankcolor':Spassrankcolor,
+                      'Suserfirstletter':Suserfirstletter,
+                      'Suserremaining':Suserremaining,
+                      'Fpassrankcolor':Fpassrankcolor,
+                      'Fuserfirstletter':Fuserfirstletter,
+                      'Fuserremaining':Fuserremaining,
                         'Firstuser':Firstuser,
                         'Seconduser':Seconduser,
                         'Fexists':Fexists,
@@ -637,6 +653,7 @@ def teamrate(request):
                    'rank':rank,
                    'color':color,
                    'exists':Exists})
+
 
 
 

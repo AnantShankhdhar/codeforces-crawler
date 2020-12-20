@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
+            <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" target="_blank" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
           </li>
         </ul>
         <ul class="navbar-nav navbar-right">
@@ -33,9 +33,9 @@
               Contributors
             </a>
             <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
-              <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
-              <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
             </div>
           </li>
 
@@ -57,7 +57,18 @@
       <div class="card usercardinfo" >
         <span class="info">
           <p class="ques" style="display:inline">User name: </p>
-          <p class="ans" style="display:inline">{{ Firstuser }} </p>
+          {% if Fcontests_given == True %}
+            {% if Frating >= 3000 %}
+              {% spaceless %}
+              <p class="ans" style="display:inline; color: black;" >{{ Fuserfirstletter }} </p>
+              <p class="ans" style="display:inline; color: red;" >{{ Fuserremaining }} </p>
+              {% endspaceless %}
+            {% else %}
+            <p class="ans" style="display:inline; color: {{Fpassrankcolor}};">{{ Firstuser }} </p>
+            {% endif %}
+          {% else %}
+            <p class="ans" style="display:inline">{{ Firstuser }} </p>
+          {% endif %}
         </span>
         <span class="info">
           <p class="ques" style="display:inline">Name: </p>
@@ -100,7 +111,18 @@
       <div class="card usercardinfo" >
         <span class="info">
           <p class="ques" style="display:inline">User name: </p>
-          <p class="ans" style="display:inline">{{ Seconduser }} </p>
+          {% if Scontests_given == True %}
+            {% if Srating >= 3000 %}
+              {% spaceless %}
+              <p class="ans" style="display:inline; color: black;" >{{ Suserfirstletter }} </p>
+              <p class="ans" style="display:inline; color: red;" >{{ Suserremaining }} </p>
+              {% endspaceless %}
+            {% else %}
+            <p class="ans" style="display:inline; color: {{Spassrankcolor}};">{{ Seconduser }} </p>
+            {% endif %}
+          {% else %}
+            <p class="ans" style="display:inline">{{ Seconduser }} </p>
+          {% endif %}
         </span>
         <span class="info">
           <p class="ques" style="display:inline">Name: </p>

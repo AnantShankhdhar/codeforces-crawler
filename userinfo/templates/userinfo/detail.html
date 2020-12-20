@@ -81,7 +81,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
+            <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" target="_blank" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
           </li>
         </ul>
         <ul class="navbar-nav navbar-right">
@@ -90,9 +90,9 @@
               Contributors
             </a>
             <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
-              <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
-              <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
+              <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/"  target="_blank" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
             </div>
           </li>
 
@@ -165,7 +165,7 @@
 
         <h2 class="recommendation">Virtual Contest Recommendations</h2>
         {% for key,value in VCList %}
-          <a href="https://codeforces.com/contestRegistration/{{value}}/virtual/true" style="display:inline">{{ key }}</a>
+          <a href="https://codeforces.com/contestRegistration/{{value}}/virtual/true" target="_blank" style="display:inline">{{ key }}</a>
         {% endfor %}
 
       </div>
@@ -179,7 +179,7 @@
 
           <p style="display:inline">
             {% for i in ProbRecommended %}
-              <a href="https://codeforces.com/problemset/problem/{{i.1}}/{{i.2}}" style="display:inline">{{ i.0 }}</a> ,
+              <a href="https://codeforces.com/problemset/problem/{{i.1}}/{{i.2}}" target="_blank" style="display:inline">{{ i.0 }}</a> ,
             {% endfor %}
           </p>
       </div>
@@ -248,22 +248,22 @@
   {% endif %}
   {% if FirstTimeChangeExits == True %}
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <div class="card">
         <h2 class="recommendation">Rating Changes in Contests</h2>
-        <span class="info" style="display:inline">
+        <span class="info">
         {% for k in FirstTimeChange %}
 
-          <p class="ques" style="display:inline">{{ k}}, </p>
+          <p class="ques" >{{ k}}</p>
 
         {% endfor %}
         </span>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
 
     </div>
 
