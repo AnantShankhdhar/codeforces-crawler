@@ -55,7 +55,7 @@
           <label for="handle">
                   User handle:
           </label><br>
-          <input type="text" id="handle" required name="user" /><br>
+          <input type="text" id="handle" placeholder="handle" required name="user" /><br>
           <input type="submit" value="Submit">
 
       </form>
@@ -66,17 +66,17 @@
       <h3 class="toptext">Compare two users</h3>
       <form action="{% url 'userinfo:Compares' %}" method="post">
           {% csrf_token %}
-          <label for="Firsthandle">
+          <label for="Firsthandle" >
                   User handle First:
           </label>
           <br>
-          <input type="text" id="Firsthandle" required name="Firstuser"/>
+          <input type="text" id="Firsthandle"  placeholder = "handle 1" required name="Firstuser"/>
           <br>
           <label for="Secondhandle">
                   User handle Second:
           </label>
           <br>
-          <input type="text" id="Secondhandle" required name="Seconduser"/>
+          <input type="text" id="Secondhandle" placeholder = "handle 2" required name="Seconduser"/>
           <br>
           <input type="submit" value="Submit">
       </form>
@@ -90,19 +90,19 @@
           <label for="handle1">
                   User handle1:
           </label><br>
-          <input type="text" id="handle1" name="user1" /><br>
+          <input type="text" id="handle1" placeholder="handle 1" name="user1" /><br>
           <label for="handle2">
                   User handle2:
           </label><br>
-          <input type="text" id="handle2" name="user2" /><br>
+          <input type="text" id="handle2" name="user2" placeholder="handle 2" /><br>
           <label for="handle3">
                   User handle3:
           </label><br>
-          <input type="text" id="handle3" name="user3" /><br>
+          <input type="text" id="handle3" name="user3" placeholder = "handle 3" /><br>
           <label for="handle4">
                   User handle4:
           </label><br>
-          <input type="text" id="handle4" name="user4" /><br>
+          <input type="text" id="handle4" name="user4" placeholder = "handle 4" /><br>
           <input type="submit" value="Submit">
           <p>{{error}}</p>
       </form>

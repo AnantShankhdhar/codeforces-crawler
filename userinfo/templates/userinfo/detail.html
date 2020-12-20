@@ -13,8 +13,10 @@
         <script type="text/javascript">
           google.charts.load("current", {packages:["calendar"]});
           google.charts.setOnLoadCallback(drawChart);
-
+          
+ 
           function drawChart() {
+         
           var dataTable1 = new google.visualization.DataTable();
           dataTable1.addColumn({ type: 'date', id: 'Date' });
           dataTable1.addColumn({ type: 'number', id: 'Won/Loss' });
@@ -40,7 +42,7 @@
 
            var options1 = {
              title: "Accepted heatmap",
-             colorAxis: {minValue: 0, maxValue: 10,  colors: ['#99ff99', '#003300']},
+             colorAxis: {minValue: 0, maxValue: 20,  colors: ['#99ff99', '#003300']},
              height:chartH,
              width:1000,
            };
@@ -52,9 +54,9 @@
 
            var options2 = {
              title: "Submission heatmap",
-             colorAxis: {minValue: 0, maxValue: 10,  colors: ['#99ff99', '#003300']},
+             colorAxis: {minValue: 0, maxValue: 20,  colors: ['#99ff99', '#003300']},
              height:chartH,
-             width:1000
+             width:1000,
            };
 
            chart1.draw(dataTable1, options1);

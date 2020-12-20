@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'GT Walsheim Pro';
   src: local('GT Walsheim Pro Medium'), local('GT-Walsheim-Pro-Medium'),
@@ -10,6 +11,7 @@
 body{
   background-color: #FFDEAD;
 }
+
 .card{
   border-radius: 4px;
   padding-left: 10px;
@@ -58,3 +60,4 @@ input[type=submit] {
   margin: 4px 2px;
   cursor: pointer;
 }
+
