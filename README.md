@@ -2,16 +2,16 @@
 A website that recommends problems, virtual contests and shows user statistics for users of the coding platform codeforces.
 
 ## Requirements
-**[Django](https://www.djangoproject.com/)**
-**[Requests](https://pypi.org/project/requests/)**
-**[BeautifulSoup](https://pypi.org/project/beautifulsoup4/)**
+**[Django](https://www.djangoproject.com/)**  
+**[Requests](https://pypi.org/project/requests/)**  
+**[BeautifulSoup](https://pypi.org/project/beautifulsoup4/)**  
 
 ## Installing requirements
-Navigate to the directory and run
+Navigate to the directory and run  
 **pip install -r requirements.txt**
 
 ## Running the project
-Navigate to the directory and run
+Navigate to the directory and run  
 **python manage.py runserver --insecure**
 
 It has 3 parts:
