@@ -8,7 +8,7 @@ It shows the following features for a single user-
   - Recommendation of Virtual contests
   - Recommendation of Problems for practise
   - Languages used
-  - Level of questions(i.e. A,B,C) solved
+  - Level of questions (i.e. A,B,C) solved
   - Rating of questions solved
   - Submission Verdict
   - Rating and ranks in contests
@@ -21,7 +21,7 @@ It shows the following features for a single user-
 It compares the following featuures for two users-   
   - General information
   - Languages used
-  - Level of questions(i.e. A,B,C) solved
+  - Level of questions (i.e. A,B,C) solved
   - Rating of questions solved
   - Submission Verdict
   - Rating and ranks in contests
@@ -30,7 +30,7 @@ It compares the following featuures for two users-
 - Team rating   
 It calculates team rating, rank and color for 1-4 users.
 
-This project uses Django as its Web framework. Though Beautiful Soup was used initially for web scraping, Codeforces API was used a lot later.
+This project uses Django as its Web framework. Though Beautiful Soup was used initially for web scraping, Codeforces API was used later.
 
 It has been developed by-
 - Divyam Singal
