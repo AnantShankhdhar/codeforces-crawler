@@ -1,16 +1,16 @@
 # codeforces-crawler
 A website that recommends problems, virtual contests and shows user statistics for users of the coding platform codeforces.
 
-##Requirements
+## Requirements
 **[Django](https://www.djangoproject.com/)**
 **[Requests](https://pypi.org/project/requests/)**
 **[BeautifulSoup](https://pypi.org/project/beautifulsoup4/)**
 
-##Installing requirements
+## Installing requirements
 Navigate to the directory and run
 **pip install -r requirements.txt**
 
-##Running the project
+## Running the project
 Navigate to the directory and run
 **python manage.py runserver --insecure**
 
