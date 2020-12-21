@@ -8,11 +8,11 @@ A website that recommends problems, virtual contests and shows user statistics f
 
 ## Installing requirements
 Navigate to the directory and run  
-**pip install -r requirements.txt**
+### pip install -r requirements.txt
 
 ## Running the project
 Navigate to the directory and run  
-**python manage.py runserver --insecure**
+### python manage.py runserver --insecure
 
 It has 3 parts:
 - User statistics:   
