@@ -199,8 +199,11 @@ def detail(request):
         userfirstletter = user[0]
         userremaining = user[1:]
 
-        VerdictList['ACCEPTED'] = VerdictList['OK']
-        del VerdictList['OK']
+        if ('OK' in VerdictList):
+            VerdictList['ACCEPTED'] = VerdictList['OK']
+            del VerdictList['OK']
+        else:
+            pass
 
 
         TypeList_label = []
@@ -394,11 +397,17 @@ def Compares(request):
         STagListAvg = Sverdict[24]
         SFirstTimeChange = Sverdict[25]
 
-        SVerdictList['ACCEPTED'] = SVerdictList['OK']
-        del SVerdictList['OK']
+        if ('OK' in FVerdictList):
+            FVerdictList['ACCEPTED'] = FVerdictList['OK']
+            del FVerdictList['OK']
+        else:
+            pass
 
-        FVerdictList['ACCEPTED'] = FVerdictList['OK']
-        del FVerdictList['OK']
+        if ('OK' in SVerdictList):
+            SVerdictList['ACCEPTED'] = SVerdictList['OK']
+            del SVerdictList['OK']
+        else:
+            pass
 
         Frank, Fpassrankcolor = rank_color(Frating)
 

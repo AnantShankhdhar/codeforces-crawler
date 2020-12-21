@@ -176,6 +176,12 @@ def scrape(username):
         #Problem recommendation
         #prob_list contains all solved
         prob_recommended=[]
+        weak10=['greedy','math','implementation','constructive algorithms','brute force','dp','sortings','data structures','graphs','binary search']
+        j=0
+        while len(weak_tag_list)<10:
+            if weak10[j] not in weak_tag_list:
+                weak_tag_list[weak10[j]]=1
+            j+=1
 
         for weak_tag in weak_tag_list:
             all_prob = requests.get(api_url + "problemset.problems?tags="+weak_tag)
