@@ -67,11 +67,15 @@ def detail(request):
         HeatmapList = verdict[26]
         HeatmapListAC = verdict[27]
         FirstTimeChangeExits=False
-
-        height = (HeatmapListAC[0][0]-HeatmapListAC[len(HeatmapListAC)-1][0]+1)*175
-
-        VerdictList['ACCEPTED'] = VerdictList['OK']
-        del VerdictList['OK']
+        if len(HeatmapList)==0:
+            height=0
+        else:
+            height = (HeatmapList[0][0]-HeatmapList[len(HeatmapList)-1][0]+1)*175
+        if('OK' in VerdictList):
+            VerdictList['ACCEPTED'] = VerdictList['OK']
+            del VerdictList['OK']
+        else:
+            pass
 
 
         TypeList_label = []
@@ -249,7 +253,7 @@ def detail(request):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
             #i = datetime.datetime.fromtimestamp(i).strftime('%c')
             contestTimegood.append(t)
-        height = (HeatmapListAC[0][0]-HeatmapListAC[len(HeatmapListAC)-1][0]+1)*175
+        height = (HeatmapList[0][0]-HeatmapList[len(HeatmapListAC)-1][0]+1)*175
         return render(request, 'userinfo/detail.html',
                       {
                       'user':user,
