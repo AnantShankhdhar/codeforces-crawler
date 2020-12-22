@@ -59,7 +59,7 @@
             </span>
             <span class="info">
                 <p class="ques" style="display:inline">Team Color: </p>
-                <p class="ans" style="display:inline">{{ color }} </p>
+                <p class="ans" style="display:inline;{% if 'BRed' in color %} color:red; {% else %} color:{{ color}};{% endif %}">{{ color }} </p>
             </span>
             {% if length != 0 %}
                 (The following  {{ length }} users don't exists-
