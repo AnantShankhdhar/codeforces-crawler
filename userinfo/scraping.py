@@ -273,7 +273,7 @@ def scrape(username):
         all_contest = requests.get(api_url + "contest.list?gym=false")
         all_contest_results = all_contest.json()['result']
         for i in range(len(all_contest_results)):
-            if i%5==0 and i>15:
+            if i%4==0 and i>12:
                 contestId=all_contest_results[i]['id']
                 phase=all_contest_results[i]['phase']
                 contest_name = all_contest_results[i]['name']
@@ -281,6 +281,8 @@ def scrape(username):
                     if (rating<=1599 and contest_name[23:29]=="Div. 1"):
                         continue
                     if (rating>=1900 and contest_name[23:29]=="Div. 3"):
+                        continue
+                    if (rating>=2100 and (contest_name[23:29]=="Div. 2" or contest_name[0:11]=="Educational")):
                         continue
                     vc_list.append([contest_name,contestId])
                     if len(vc_list)==5:
