@@ -278,6 +278,8 @@ def scrape(username):
                 phase=all_contest_results[i]['phase']
                 contest_name = all_contest_results[i]['name']
                 if (contestId not in prob_list_contest) and (phase == "FINISHED") and (contest_name[0:10]=="Codeforces" or contest_name[0:11]=="Educational"):
+                    if (contest_name[23:29]=="Div. 4"):
+                        continue
                     if (rating<=1599 and contest_name[23:29]=="Div. 1"):
                         continue
                     if (rating>=1900 and contest_name[23:29]=="Div. 3"):
