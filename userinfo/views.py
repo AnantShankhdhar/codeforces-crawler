@@ -603,7 +603,7 @@ def Compares(request):
                         'FTagListAvg_data':FTagListAvg_data,
                         'STagListAvg_data':STagListAvg_data,
                         'FcontestTimegood':FcontestTimegood,
-                        'ScontestTimegood':FcontestTimegood,
+                        'ScontestTimegood':ScontestTimegood,
                         'Franks':Franks,
                         'Sranks':Sranks,
                         'FnewRatings': FnewRatings,
