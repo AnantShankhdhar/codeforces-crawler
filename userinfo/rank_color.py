@@ -1,5 +1,8 @@
 def rank_color(rating):
-    if rating<=1199:
+    if rating==0:
+        rank='Unrated'
+        color='Black'
+    elif rating<=1199:
         rank='Newbie'
         color='Grey'
     elif rating<=1399:
