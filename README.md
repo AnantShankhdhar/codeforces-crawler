@@ -1,5 +1,6 @@
 # codeforces-crawler
-A website that recommends problems, virtual contests and shows user statistics for users of the coding platform codeforces.
+A website that recommends problems, virtual contests and shows user statistics for users of the coding platform codeforces.   
+Link of the website: [CodeForces Crawler](http://cfcrawler.pythonanywhere.com/)
 
 ## Requirements
 **[Django](https://www.djangoproject.com/)**  
@@ -31,7 +32,7 @@ It shows the following features for a single user-
   - Submission heatmap
   - Accepted submission heatmap
 - Comparison of two users   
-It compares the following featuures for two users-   
+It compares the following features for two users-   
   - General information
   - Languages used
   - Level of questions (i.e. A,B,C) solved
