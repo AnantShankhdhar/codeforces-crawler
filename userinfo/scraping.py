@@ -287,6 +287,8 @@ def scrape(username):
                     vc_list.append([contest_name,contestId])
                     if len(vc_list)==5:
                         break
+        
+        
 
         if contest_given==False:
             return exists, contest_given, name, rating, maxrating, country, city, organization, rank, maxrank, tag_list, prob_rat, type_list, lang_list, verdict_list,[],[],[],[],0,0,vc_list,recent_list,prob_recommended,tag_list_avg,[],heatMapList,heatMapListac

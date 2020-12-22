@@ -256,7 +256,7 @@ def detail(request):
             t = time.strftime('%Y-%m-%d', time.localtime(i))
             #i = datetime.datetime.fromtimestamp(i).strftime('%c')
             contestTimegood.append(t)
-        height = (HeatmapList[0][0]-HeatmapList[len(HeatmapListAC)-1][0]+1)*175
+        height = (HeatmapList[0][0]-HeatmapList[len(HeatmapList)-1][0]+1)*175
         return render(request, 'userinfo/detail.html',
                       {
                       'user':user,
