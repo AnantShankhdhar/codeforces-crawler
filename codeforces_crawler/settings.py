@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'sp_$b%e_g1v)eam^rqlef5v8#@&6qhxw1&2f6me^c!b^v+rkwl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG= DEBUG
 
 ALLOWED_HOSTS = ["127.0.0.1","cfcrawler.pythonanywhere.com"]
@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/cfcrawler/codeforces_crawler/static'
+STATIC_ROOT = '/home/cfcrawler/codeforces-crawler/static'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "../userinfo/static"),
 
