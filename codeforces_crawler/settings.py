@@ -26,7 +26,7 @@ SECRET_KEY = 'sp_$b%e_g1v)eam^rqlef5v8#@&6qhxw1&2f6me^c!b^v+rkwl'
 DEBUG = True
 TEMPLATE_DEBUG= DEBUG
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1","cfcrawler.pythonanywhere.com"]
 
 
 # Application definition
@@ -121,9 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../userinfo/static"),
+STATIC_ROOT = '/home/cfcrawler/codeforces_crawler/static'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "../userinfo/static"),
 
-]
+# ]
 LOGIN_REDIRECT_URL = 'userinfo:index'
 LOGIN_REDIRECT_URL = 'userinfo:index'
