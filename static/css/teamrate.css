@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'GT Walsheim Pro';
+    src: local('GT Walsheim Pro Medium'), local('GT-Walsheim-Pro-Medium'),
+      url('../font/GTWalsheimPro-Medium.woff2') format('woff2'),
+      url('../font/GTWalsheimPro-Medium.woff') format('woff'),
+      url('../font/GTWalsheimPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  body{
+    background-color: #FFDEAD;
+  }
+
+  .card{
+    margin-top: 50px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 14px 80px 18px 36px;
+    cursor: auto;
+  }
+  .wrapper{
+      margin: 0 auto;
+  }
+  .card:hover{
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+
+  .ques{
+    font-family: GT Walsheim Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #B6B6B6
+  }
+
+  .ans{
+    font-family: GT Walsheim Pro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #212121;
+  }
