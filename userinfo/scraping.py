@@ -150,7 +150,10 @@ def scrape(username):
                 except:
                     pass
                 type = problem['index']
-                contestId = problem['contestId']
+                try:
+                    contestId = problem['contestId']
+                except:
+                    pass
                 prob_list.append(str(contestId)+type)
                 if contestId not in prob_list_contest:
                     prob_list_contest.append(contestId)
