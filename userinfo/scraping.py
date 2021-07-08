@@ -31,8 +31,12 @@ def scrape(username):
     api_url = "https://codeforces.com/api/"
 
     info = requests.get(api_url + "user.info?handles=" + username)
+    try:
+        user_status = info.json()['status']
+    except:
+        user_status = ''
 
-    if(info.json()['status']!='OK'):
+    if user_status != 'OK':
         exists = False
         return exists
     else:
@@ -87,7 +91,10 @@ def scrape(username):
         heatmap_list_ac={}
 
         submissions = requests.get(api_url + "user.status?handle=" + username)
-        submissions_results = submissions.json()['result']
+        try:
+            submissions_results = submissions.json()['result']
+        except:
+            submissions_results = []
         for result in submissions_results:
             #verdict
             verdict=result['verdict']
@@ -188,7 +195,10 @@ def scrape(username):
 
         for weak_tag in weak_tag_list:
             all_prob = requests.get(api_url + "problemset.problems?tags="+weak_tag)
-            all_prob_result=all_prob.json()['result']['problems']
+            try:
+                all_prob_result=all_prob.json()['result']['problems']
+            except:
+                all_prob_result = []
             for prob in all_prob_result:
                 contestId=prob['contestId']
                 index=prob['index']
@@ -231,7 +241,10 @@ def scrape(username):
         first_time_change=[]
 
         ratings = requests.get(api_url + "user.rating?handle=" + username)
-        rating_results = ratings.json()['result']
+        try:
+            rating_results = ratings.json()['result']
+        except:
+            rating_results = []
         if len(rating_results)!=0:
             bestRank=1e10
             worstRank=1
@@ -274,7 +287,10 @@ def scrape(username):
         # prob_list_contest contains contest with atleast one solved
         vc_list=[]
         all_contest = requests.get(api_url + "contest.list?gym=false")
-        all_contest_results = all_contest.json()['result']
+        try:
+            all_contest_results = all_contest.json()['result']
+        except:
+            all_contest_results = []
         for i in range(len(all_contest_results)):
             if i%4==0 and i>12:
                 contestId=all_contest_results[i]['id']
