@@ -2,12 +2,13 @@ def only_rating(users):
     import requests
     import json
     api_url = "https://codeforces.com/api/"
+    headers = {'Accept': 'application/json'}
 
     exists=[]
     not_exists=[]
     users_rating=[]
     for user in users:
-        info = requests.get(api_url + "user.info?handles=" + user)
+        info = requests.get(api_url + "user.info?handles=" + user, headers=headers)
         if (info.json()['status'] != 'OK'):
             not_exists.append(user)
         else:
@@ -29,8 +30,9 @@ def scrape(username):
     import time
     exists = True
     api_url = "https://codeforces.com/api/"
+    headers = {'Accept': 'application/json'}
 
-    info = requests.get(api_url + "user.info?handles=" + username)
+    info = requests.get(api_url + "user.info?handles=" + username, headers=headers)
     try:
         user_status = info.json()['status']
     except:
@@ -90,7 +92,7 @@ def scrape(username):
         heatmap_list={}
         heatmap_list_ac={}
 
-        submissions = requests.get(api_url + "user.status?handle=" + username)
+        submissions = requests.get(api_url + "user.status?handle=" + username, headers=headers)
         try:
             submissions_results = submissions.json()['result']
         except:
@@ -194,7 +196,7 @@ def scrape(username):
             j+=1
 
         for weak_tag in weak_tag_list:
-            all_prob = requests.get(api_url + "problemset.problems?tags="+weak_tag)
+            all_prob = requests.get(api_url + "problemset.problems?tags="+weak_tag, headers=headers)
             try:
                 all_prob_result=all_prob.json()['result']['problems']
             except:
@@ -240,7 +242,7 @@ def scrape(username):
         became=["Newbie","Pupil","Specialist","Expert","Candidate Master","Master","International Master","Grandmaster","International Grandmaster","Legendary Grandmaster"]
         first_time_change=[]
 
-        ratings = requests.get(api_url + "user.rating?handle=" + username)
+        ratings = requests.get(api_url + "user.rating?handle=" + username, headers=headers)
         try:
             rating_results = ratings.json()['result']
         except:
@@ -286,7 +288,7 @@ def scrape(username):
         #contest_list has all given contests
         # prob_list_contest contains contest with atleast one solved
         vc_list=[]
-        all_contest = requests.get(api_url + "contest.list?gym=false")
+        all_contest = requests.get(api_url + "contest.list?gym=false", headers=headers)
         try:
             all_contest_results = all_contest.json()['result']
         except:
